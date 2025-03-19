@@ -61,7 +61,7 @@ Because the races have different bonuses based on historical and logical consequ
  - Asian:
 
 ### Types of units
-Most of the values of the stats are not yet ironed out, so they are to be determined during production (TDB).
+Most of the values of the stats are not yet ironed out, so they are to be determined during production (TBD).
 Each of the units have:
  - Type - what the unit actually is (e.g. Catapult, Spearman, etc.);
  - Race - what race has access to that unit, can be either one of them, a combination of 2 races or just one race;
@@ -78,21 +78,25 @@ In that range the unit shoots, or does any other kind of ranged attack. That val
  - Cost Resources - cost to build in the resources available - in the order that they are described in the 'Resource' section
  - Cost Maintain - cost to maintain a unit during its lifetime - the same order of resources as the one in the cost to make
  - Cost Population - how many population slots does the unit take
+ - Technologies Required - what is required to be researched before the unit can be created
+ - Buildings Required - what buildings are required for the unit to be created
 
-| Unit type | Race | Melee Damage | Melee Area | Ranged Damage | Ranged Area | No Attack Area | Health | Defense | Special Abilities | Cost Resources | Cost Maintain | Cost Population |
-| --------- | ---- | ------------ | ---------- | ------------- | ----------- | -------------- | ------ | ------- | ----------------- | -------------- | ------------- | --------------- |
-| Villager  | All  | TBD          | TBD        | TBD           | TBD         | TBD            | TBD    | TBD     | NONE/TBD          | TBD            | TBD           | 1               |
-| Ranger    | All  | TBD          | TBD        | TBD           | TBD         | TBD            | TBD    | TBD     | NONE/TBD          | TBD            | TBD           | 1               |
-| Infantry  | All  | TBD          | TBD        | TBD           | TBD         | TBD            | TBD    | TBD     | NONE/TBD          | TBD            | TBD           | 1               |
-| Catapult  | All  | TBD          | TBD        | TBD           | TBD         | TBD            | TBD    | TBD     | NONE/TBD          | TBD            | TBD           | 2               |
+| Unit type | Race | Melee Damage | Melee Area | Ranged Damage | Ranged Area | No Attack Area | Health | Defense | Special Abilities | Cost Resources | Cost Maintain | Cost Population | Technologies Required | Buildings Required |
+| --------- | ---- | ------------ | ---------- | ------------- | ----------- | -------------- | ------ | ------- | ----------------- | -------------- | ------------- | --------------- | --------------------- | ------------------ |
+| Villager  | All  | TBD          | TBD        | TBD           | TBD         | TBD            | TBD    | TBD     | NONE/TBD          | TBD            | TBD           | 1               | NONE                  | Castle             |
+| Ranger    | All  | TBD          | TBD        | TBD           | TBD         | TBD            | TBD    | TBD     | NONE/TBD          | TBD            | TBD           | 1               | TBD                   | TBD                |
+| Infantry  | All  | TBD          | TBD        | TBD           | TBD         | TBD            | TBD    | TBD     | NONE/TBD          | TBD            | TBD           | 1               | TBD                   | TBD                |
+| Catapult  | All  | TBD          | TBD        | TBD           | TBD         | TBD            | TBD    | TBD     | NONE/TBD          | TBD            | TBD           | 2               | TBD                   | TBD                |
 
 ### Special abilities breakdown
 The special abilities are abilities that the player can use in or out of battle from the UI of the unit. Each of them does a different thing. Some of them
 are exclusive to a unit's race, to a common unit that is specifically from this race, or are accessible to more than one unit.
 
 ### Special traits
-These are normal abilities that each of the unit has to some extent. For each race these traits can have different values for each of the units.
+These are special qualities that each of the unit has to some extent, that change the way the unit can be used. For each race these traits can have different values for each of the units.
 Having 0 on any of the trait values means that the unit does not have that trait.
+Each unit has a random chance to gain a trait when spawning. Some units will always have a trait or a trait boost (boosts the strength of the trait). Some races have a base specific trait base stat
+that will be more than 0, thus allowing all the units of the race to benefit from that trait (example is the African-American race having a base stealth trait that linearly boosts that trait of all its units).
  - Stealth - units are not visible to the player if a unit with a visibility trait higher than this unit's stealth trait is not nearby
  - Visibility - units are able to uncover more of the map and can see units with lower stealth
 
@@ -103,18 +107,89 @@ and the resulting damage is dealt to the unit. (damage dealt = enemy attack poin
 
 # Buildings
 More buildings will be added with the progression of development.
+Each of the buildings has a different effect on the economy or population of the kingdom. Some of the buildings can produce units, others can produce resources passively or serve as
+a storage for those resources. On the other hand other structures can be used to research new technologies and uncover new units, resources and other buildings. It is not uncommon for
+a building to be able to do a combination of those things, leaving the choice of what to prioritize in the hands of the player.
+For the buildings that can research and/or spawn units a queue system is implemented that holds the current and next 5 tasks that need to be done. 5 tasks is subject to change during production.
+The buildings' main stats are:
+ - Building Type - the type of building that it will be;
+ - Race - what race can use those buildings;
+ - Ranged Damage, Ranged Area, No Attack Area, Health, Defense, Special Abilities, Technologies Required, Costs - same concept as the stats for the units;
+ - Technologies Inside - what technologies can be researched from that building once building it was completed
+
 | Building type | Race | Ranged Damage | Ranged Area | No Attack Area | Health | Defense | Special Abilities | Technologies Required | Technologies Inside | Cost Build | Cost Maintain |
 | ------------- | ---- | ------------- | ----------- | -------------- | ------ | ------- | ----------------- | --------------------- | ------------------- | ---------- | ------------- |
 | Castle/Hub    | All  | NONE          | NONE        | NONE           | TBD    | TBD     | TBD               | NONE                  | TBD                 | TBD        | TBD           |
+| Defense tower | All  | TBD           | TBD         | TBD            | TBD    | TBD     | TBD               | TBD                   | TBD                 | TBD        | TBD           |
+| House         | All  | NONE          | NONE        | NONE           | TBD    | TBD     | TBD               | NONE                  | TBD                 | TBD        | TBD           |
 
 # Technologies
-The same implementation as in "Tzar" (researched from a specific building)
+The same implementation as in "Tzar" (researched from a specific building). Most of the buildings in the game will have access to technologies that can be "researched" for a cost.
+During the researching of a technology, no other action can be happening in the same building. For example if a technology is "researched" from the Castle building, then no
+units can be created or no new technologies can be researched until this one finishes.
 
-# Resources
+# Resources and eras
+Resources can be mined actively (with villagers or other units) or be passively gained by structures.
+They have a specific value attached to them and once that value becomes 0, they disappear leaving an empty space on the map. On each map a single resource
+of each type is placed where the resource is infinite. This way battles for that resource can take place leaving the winner happy that this specific resource will
+be available until the end of the game. For a player to figure out the quantity of the resource, at least one of that resource needs to be harvested.
+For example a stone resource's quantity will be unseen until a player's unit has collected at least one of that resource. Once that becomes the case
+that resource's (and only that specific rock's) quantity will be seen.
+The main resources that are used throughout the game are:
+ - Stone;
+ - Wood;
+ - Gold;
+ - Bronze;
+ - Iron;
+ - Oil;
+ - Uranium.
+There resources also are used to determine when a kingdom entered a new era. There are 5 eras:
+ - Stone era - in that era the player has access only to stone, wood and gold (mainly used for trading and mercenaries);
+ - Bronze era - the bronze material is unlocked and the player can make new units and uncover new technologies;
+ - Iron era - the iron material is unlocked - new units, new technologies;
+ - Industrial era - same thing but for oil
+ - Nuclear era - same thing but for uranium. This is the last era of the game.
+To enter a new era the player must build a specific building and research the technology that unlocks obtaining the next material.
+From the beginning of the game only wood and stone are available, every other material needs to be researched. Whenever a new resource
+is researched, a new location is added to the map where that new resource can be mined.
 
-# Mechanics
+# Trading and mercenaries
+When the player has enough gold and has built the appropriate buildings, trading and mercenary hiring can begin.
+Trading is used to exchange different resources with the AI marketplace, with other AI or human players. A specific resource can be
+exchanged for another specific resource (without itself) or for a flat gold price. Important thing is that for a resource to be able to be exchanged
+it needs to be researched first.
+
+The other use of gold is to recruit mercenaries to fight for that kingdom. Mercenaries can be of different races and have different traits
+all of this impacting the value of the mercenary. When they are hired they can be used until the unit dies. Besides the traits and races the price is also
+affected by the tier of the unit and how far into the technology tree it is.
+
+Other uses for the gold will be determined during the production of the game.
 
 # Weather and day changes
+The main gimic of the game is the dynamic weather and day changes. The game will have an active day and night cycle impacting the unit stats
+thus becoming a mechanic that needs to be mastered and offering more gameplay flexibility and diversity.
+The same can be said about the weather changes. There are a couple of main weather effects that change the stats of the units and affect them
+differently depending on the traits and race in a mostly positive way. Besides them there are some extreme weather conditions that impact all the players negatively.
+These are mainly disasters connected to the locations on the map. The main weather effects are:
+ - Mild weather conditions:
+     - Hot weather - pretty self-explanatory;
+     - Cold weather - same;
+     - Rain - causes rain to fall;
+     - Fog;
+     - Snowfall;
+ - More serious weather conditions:
+     - Snow storm;
+     - Heat wave;
+     - Cyclone - needs more research on how exactly they form;
+     - Tornado - happens only on big flat dry areas of land (needs more research on how they form);
+     - Tsunami - happens only near large bodies of water, when there was an earthquake or a meteorite fell in the large body of water;
+     - River flood - can happen when there was a snow storm followed by a heat wave in a close succession or when there was rain for a while;
+     - Earthquake;
+     - Meteorite strike;
+
+Only one of these conditions can be active at the same time at the same place. But more that one conditions can be active at the same time on the entirety of the map.
+For example there can be a heat wave in the southernmost part of the map and a snow storm at the most northern side of the map.
+All of these conditions happen randomly but the chances for them to happen are calculated based on the map and objects that are around the target area.
 
 # Different locations
 
