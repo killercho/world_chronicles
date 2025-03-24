@@ -1,8 +1,9 @@
 # World Chronicles
-An RTS game (star craft like game) with a dynamic weather system that has an active effect on the game board.
+An RTS game (starcraft like game) with a dynamic weather system that has an active effect on the game board.
 This is a document describing the overall feel of the game and will be changed accordingly when ideas change,
 need some improvement or a new thing is thought of.
-!TRIGGER WARNING! The game is based on real facts and logic, so bonuses like "African-Americans are less likely to be seen during the night or in a heavy storm"
+
+**!TRIGGER WARNING!** The game is based on real facts and logic, so bonuses like "African-Americans are less likely to be seen during the night or in a heavy storm"
 will be used because they make local sense. If you feel offended remember this:
  - The game is just that - a game, and it should be used just for fun;
  - I do not care about your feelings;
@@ -135,20 +136,26 @@ of each type is placed where the resource is infinite. This way battles for that
 be available until the end of the game. For a player to figure out the quantity of the resource, at least one of that resource needs to be harvested.
 For example a stone resource's quantity will be unseen until a player's unit has collected at least one of that resource. Once that becomes the case
 that resource's (and only that specific rock's) quantity will be seen.
+For some of the resource types a specific mine building can be built, that *mines* that specific resource.
+When such building is near a place where the resource can be mined, the mine will start producing
+resources *extracting* them from the location. The mined resources are collected inside the building from where a worker needs to take them
+and put them into storage. No additional automation can be done.
 The main resources that are used throughout the game are:
- - Stone;
- - Wood;
- - Gold;
- - Bronze;
- - Iron;
- - Oil;
- - Uranium.
+ - **Stone** - harvested from big chunks of rocks on the ground (like in **Tzar**) or taken as a mine resource from the mine building;
+ - **Wood** - harvested from the ground as trees that have to be chopped down;
+ - **Gold** - taken from the mines as a resource or harvested as singular chunks around river beds, that need to be picked up with a worker;
+ - **Bronze** - taken from the mines as a resource;
+ - **Iron** - taken from the mines as a resource;
+ - **Oil** - taken from oases and snowy biomes with a specific extractor building that matches the function of the mine building, or from the seas with a similar building (just for water), the water resources need to be transferred by ships;
+ - **Uranium** - taken from the mines as a resource.
+
 There resources also are used to determine when a kingdom entered a new era. There are 5 eras:
  - Stone era - in that era the player has access only to stone, wood and gold (mainly used for trading and mercenaries);
  - Bronze era - the bronze material is unlocked and the player can make new units and uncover new technologies;
  - Iron era - the iron material is unlocked - new units, new technologies;
  - Industrial era - same thing but for oil
  - Nuclear era - same thing but for uranium. This is the last era of the game.
+
 To enter a new era the player must build a specific building and research the technology that unlocks obtaining the next material.
 From the beginning of the game only wood and stone are available, every other material needs to be researched. Whenever a new resource
 is researched, a new location is added to the map where that new resource can be mined.
@@ -166,7 +173,7 @@ affected by the tier of the unit and how far into the technology tree it is.
 Other uses for the gold will be determined during the production of the game.
 
 # Weather and day changes
-The main gimic of the game is the dynamic weather and day changes. The game will have an active day and night cycle impacting the unit stats
+The main gimmick of the game is the dynamic weather and day changes. The game will have an active day and night cycle impacting the unit stats
 thus becoming a mechanic that needs to be mastered and offering more gameplay flexibility and diversity.
 The same can be said about the weather changes. There are a couple of main weather effects that change the stats of the units and affect them
 differently depending on the traits and race in a mostly positive way. Besides them there are some extreme weather conditions that impact all the players negatively.
@@ -177,6 +184,7 @@ These are mainly disasters connected to the locations on the map. The main weath
      - Rain - causes rain to fall;
      - Fog;
      - Snowfall;
+
  - More serious weather conditions:
      - Snow storm;
      - Heat wave;
@@ -191,12 +199,64 @@ Only one of these conditions can be active at the same time at the same place. B
 For example there can be a heat wave in the southernmost part of the map and a snow storm at the most northern side of the map.
 All of these conditions happen randomly but the chances for them to happen are calculated based on the map and objects that are around the target area.
 
-# Different locations
+# Map generation, fog of war and special locations
+The map will be generated randomly each time. During map generation there would be 3 main landmarks that will be generated - higher, lower and middle ground.
+Each of these will serve respectively as mountains, water bodies (oceans, lakes, seas or rivers) and normal ground.
 
-# Map generation and fog of war
+### Normal grounds
+The standard type of land that the unit will move onto. On top of those parts of the map there can be special features that
+change the gameplay. The main features are:
+ - Snow - slowing some of the units and giving speed boost to others, also the cold might affect some kingdoms more than others. On snow is also where the snow effects are going to happen. Also, because
+of the history of the Earth, oil, stone and wood will be found more abundantly near snow grounds.
+ - Desert - has the same effects as snow but for heat instead of cold. Pretty much the opposite of the snow biome in terms of wood and stone as well. In the deserts oases can spawn that
+will provide a moderate amount of oil in later stages of the game. Other than the oil the desert will be a negative biome that will be there to inconvenience the player but make the gameplay more interesting
+because of perks catering to the population being more productive in more heat heavy regions.
+ - Grass - provides no benefits and no negatives to any of the units. This is the most basic biome that will be spread in between the deserts and snows to balance out the gameplay.
+In that biome mostly wood and stone can be found with the prospect of a little bit of oil somewhere in the middle of it all.
+
+The normal grounds are mostly balanced around early game and early resources.
+
+### Mountains
+This area will be essential for the middle of the game and part of the late game. Inside the mountains most of the bronze, iron, gold and uranium will be found. There will be three
+types of mountains in the world:
+ - **Small humps** - these will provide only the strategic advantage in battle (high grounds) with no prospect of resources later in the game.
+ - **Small mountains** - more common mountain types that provide some resources as well as strategic advantage. Where the small
+humps will mostly be used for unit placements, the small mountains can be used to place buildings on high ground as well. This provides additional
+bonuses to those buildings. As well as strategic, the small mountains will contain resource value in the form of small deposits of iron, bronze, gold and of course stone.
+ - **Peaks** - the highest types of mountains there can be. These locations will be mostly inaccessible and uncrossable serving as a natural barrier, thus providing strategic
+advantages when placing any buildings near it. These mountain types will mostly be used to provide the greatest chunk of the resources - stone, iron, bronze, gold and uranium.
+
+The mountains contain the most diverse set of resources there can be, so mousing over them provides information about
+how many of each resource there is in the mountain. From there any type of mine can be built along the mountain.
+
+### Water bodies
+There are two main types of water bodies in the game:
+ - **Oceans/Seas** - oceans and seas are mainly used for exploration and traveling with a high prospect of *oil* being available later in the game anywhere in them;
+ - **Rivers** - rivers serve mostly as strategic locations where some units and buildings have advantages and others - disadvantages. As mentioned before the rivers provide
+a small amount of gold along their bed.
+
+### Location effects
+Having certain units and buildings next to certain locations brings advantages and disadvantages to that specific unit/building.
+Positive effects:
+ - Houses placed around the river bed give more population growth than the base
+
+Negative effects:
+ - Houses placed in the desert give lower population than the base
+
+Other effects will be developed as the game progresses.
 
 # Win conditions
+The win condition is simple - destroy everyone around you.
 
 # Artwork, sound design and general style
+The artwork (for now) will be self-made, that is why it will be probably be very scuffed. The same can be said about the sound design.
+The overall feel of the game that will be pursued will be that of early late 1990s to early 2000s with pixel art.
 
-# Multiplier and AI
+# Multiplayer and AI
+In the later stages of the game (when all or most of the ideas in this document have been realized), a local multiplayer (maybe even non-local multiplayer)
+will be developed. *No promises!*
+On the other hand AI will be a focus of development, albeit a later focus as well. The general idea about AI is splitting it into 2 parts - overlord that sees and can react to everything,
+and a *stupid* single person neural network that is responsible for one unit at a time. This way the AI can act as a hive mind with a leader. This idea is still pretty rough
+and might not be possible, be too hard to execute or might not be as good as it looks now. Time will tell!
+
+# That is pretty much it!
