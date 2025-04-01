@@ -5,10 +5,13 @@ let
     { raylib
     , libxkbcommon
     , cmake
+    , libclang
+    , gdb
+    , gnumake
     , ...
     }:
     pkgs.mkShell {
-      nativeBuildInputs = [ raylib libxkbcommon cmake ];
+      nativeBuildInputs = [ raylib libxkbcommon cmake libclang gdb gnumake ];
 
       shellHook = ''
         echo "Entering the raylib development environment!"
