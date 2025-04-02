@@ -18,6 +18,12 @@ let
         echo "Entering the raylib development environment!"
         echo
 
+        echo "Creating the correct raylib clangd compile file under the '.clangd' name..."
+        RAYLIB_NIX_PACKAGE_PATH=$(nix-instantiate --eval-only --expr '(import <nixpkgs> {}).raylib.outPath')
+        echo "
+        CompileFlags:
+          Add: -I$RAYLIB_NIX_PACKAGE_PATH/include" > .clangd
+
         # Remove the build folder when entering the env
         # only if that option is specificaly given as an answer
         read -t 2 -p "Delete the build folder? [y/N] " NUKE
