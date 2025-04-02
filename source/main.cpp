@@ -1,15 +1,12 @@
+#include "Constants.h"
+
 #include <raylib.h>
 
 int main() {
-    // TODO: Add these constants to a constants sheet with all
-    // of the global settings
-    const int   SCREEN_WIDTH  = 800;
-    const int   SCREEN_HEIGHT = 450;
-    const int   TARGET_FPS    = 60;
-    const char* TITLE         = "basic window";
-
-    InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, TITLE);
-    SetTargetFPS(TARGET_FPS);
+    InitWindow(general_settings::SCREEN_WIDTH,
+               general_settings::SCREEN_HEIGHT,
+               general_settings::TITLE);
+    SetTargetFPS(general_settings::TARGET_FPS);
 
     while (!WindowShouldClose()) {
         BeginDrawing();
