@@ -13,6 +13,7 @@ let
     }:
     pkgs.mkShell {
       nativeBuildInputs = [ raylib libxkbcommon cmake libclang gdb gnumake tree ];
+      env.NIX_ENFORCE_PURITY = 0;
 
       shellHook = ''
         echo
