@@ -8,10 +8,11 @@ let
     , libclang
     , gdb
     , gnumake
+    , tree
     , ...
     }:
     pkgs.mkShell {
-      nativeBuildInputs = [ raylib libxkbcommon cmake libclang gdb gnumake ];
+      nativeBuildInputs = [ raylib libxkbcommon cmake libclang gdb gnumake tree ];
 
       shellHook = ''
         echo
