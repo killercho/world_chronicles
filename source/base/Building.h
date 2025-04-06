@@ -35,14 +35,19 @@ class Building {
     // leaving a mark
     virtual void Destroy() = 0;
 
-    // Plays the building animation with all of the building specifications like time to build
+    // Plays the building animation with all of
+    // the building specifications like time to build
     virtual void Build() = 0;
 
-    // Shows the UI of the current building allowing for technology research or unit creation
+    // Shows the UI of the current building
+    // allowing for technology research or unit creation
     virtual void ShowUI() = 0;
 
     // Attacks another entity
     virtual void Attack() = 0;
+
+    // Covers the functionality for when the building takes damage
+    virtual void TakeDamage() = 0;
 };
 
 #endif  // SOURCE_BASE_BUILDING_H_

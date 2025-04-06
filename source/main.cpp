@@ -1,12 +1,18 @@
-#include "Constants.h"
+#include <Constants.h>
+#include <buildings/Castle.h>
 
 #include <raylib.h>
+
+#include <memory>
 
 int main() {
     InitWindow(general_settings::SCREEN_WIDTH,
                general_settings::SCREEN_HEIGHT,
                general_settings::TITLE);
     SetTargetFPS(general_settings::TARGET_FPS);
+
+    // TODO: Create a basic castle and check the spawning and UI
+    // std::shared_ptr<Castle> castleTest = std::make_shared<Castle>();
 
     while (!WindowShouldClose()) {
         BeginDrawing();
