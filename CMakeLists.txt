@@ -14,7 +14,7 @@ file(GLOB_RECURSE PROJECT_SOURCES CONFIGURE_DEPENDS "${CMAKE_CURRENT_LIST_DIR}/s
 file(GLOB_RECURSE PROJECT_HEADERS CONFIGURE_DEPENDS "${CMAKE_CURRENT_LIST_DIR}/source/*.h")
 
 # Define PROJECT_INCLUDE to be the path to the include directory of the project
-set(PROJECT_INCLUDE "${CMAKE_CURRENT_LIST_DIR}/source")
+set(PROJECT_INCLUDE "${CMAKE_CURRENT_LIST_DIR}/source" "${CMAKE_CURRENT_LIST_DIR}/libs")
 
 # Declaring executable
 add_executable(${PROJECT_NAME})
@@ -23,9 +23,15 @@ target_sources(${PROJECT_NAME} PRIVATE ${PROJECT_SOURCES})
 target_sources(${PROJECT_NAME} PRIVATE ${PROJECT_HEADERS})
 
 target_include_directories(${PROJECT_NAME} PRIVATE "source")
+target_include_directories(${PROJECT_NAME} PRIVATE "libs")
 
+# Add and link the raylib library from the system
 find_package(raylib REQUIRED)
 target_link_libraries(${PROJECT_NAME} PRIVATE raylib)
+
+# Add and link the libraries
+add_subdirectory(libs)
+target_link_libraries(${PROJECT_NAME} PRIVATE raygui)
 
 # Setting ASSETS_PATH
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
