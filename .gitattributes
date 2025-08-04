@@ -1,0 +1,2 @@
+# Do not include any libs files in the git analytics since they are not my code
+libs/** linguist-vendored
