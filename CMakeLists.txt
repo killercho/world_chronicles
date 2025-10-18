@@ -8,6 +8,25 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Werror -pedantic -std=c++23")
 set(CMAKE_BUILD_TYPE Debug)
 
+option(ENABLE_TESTS "Enable the library tests" OFF)
+
+include(helpers.cmake)
+
+if(ENABLE_TESTS)
+    # Enable the google test library and tests when the test option was enabled
+    # Include the gtest library
+    include(FetchContent)
+    FetchContent_Declare(
+      googletest
+      URL https://github.com/google/googletest/archive/52eb8108c5bdec04579160ae17225d66034bd723.zip
+    )
+    # For Windows: Prevent overriding the parent project's compiler/linker settings
+    set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+    FetchContent_MakeAvailable(googletest)
+
+    enable_testing()
+endif()
+
 # Adding our source files
 # Define PROJECT_SOURCES and HEADERS as a list of all source files
 file(GLOB_RECURSE PROJECT_SOURCES CONFIGURE_DEPENDS "${CMAKE_CURRENT_LIST_DIR}/source/*.cpp")

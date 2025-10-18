@@ -6,3 +6,5 @@ file(GLOB LIBRARY_SOURCE
 )
 
 add_library(${LIBRARY_NAME} ${LIBRARY_SOURCE})
+
+declare_test(string_tests ${LIBRARY_SOURCE} string_tests)
