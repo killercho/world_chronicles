@@ -22,7 +22,7 @@ int main() {
         ClearBackground(RAYWHITE);
         DrawText("This is a basic raylib window", 190, 200, 20, BLACK);
 
-        GuiLabel(Rectangle(100, 100, 50, 50), curr.c_str());
+        GuiLabel(Rectangle(100, 100, 150, 50), curr.c_str());
         if (GuiButton(Rectangle(50, 50, 50, 50), "Click to change the text!")) {
             curr = "Label should be full now";
         }
