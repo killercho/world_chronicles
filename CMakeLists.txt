@@ -32,6 +32,7 @@ target_link_libraries(${PROJECT_NAME} PRIVATE raylib)
 # Add and link the libraries
 add_subdirectory(libs)
 target_link_libraries(${PROJECT_NAME} PRIVATE raygui)
+target_link_libraries(${PROJECT_NAME} PRIVATE string)
 
 # Setting ASSETS_PATH
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")

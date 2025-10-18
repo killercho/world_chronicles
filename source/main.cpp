@@ -1,22 +1,20 @@
 #include <Constants.h>
 #include <buildings/Castle.h>
 
+#include <string/String.h>
+
 #include <raygui/raygui.h>
 #include <raylib.h>
 
-#include <memory>
-#include <string>
-
 int main() {
-    InitWindow(general_settings::SCREEN_WIDTH,
-               general_settings::SCREEN_HEIGHT,
-               general_settings::TITLE);
+    InitWindow(
+        general_settings::SCREEN_WIDTH, general_settings::SCREEN_HEIGHT, general_settings::TITLE);
     SetTargetFPS(general_settings::TARGET_FPS);
 
     // TODO: Create a basic castle and check the spawning and UI
     // std::shared_ptr<Castle> castleTest = std::make_shared<Castle>();
 
-    std::string curr = "Label is empty";
+    String curr = "Label is empty";
     while (!WindowShouldClose()) {
         BeginDrawing();
         ClearBackground(RAYWHITE);

@@ -21,7 +21,9 @@ String& String::operator=(const std::string& otherString) {
     return *this;
 }
 String& String::operator=(const char* otherString) {
-    m_data = otherString;
+    if (otherString) {
+        m_data = otherString;
+    }
     return *this;
 }
 
@@ -56,19 +58,19 @@ const char* String::c_str() const {
     return m_data.c_str();
 }
 
-const std::const_iterator String::begin() const {
+const std::string::const_iterator String::begin() const {
     return m_data.begin();
 }
 
-std::iterator String::begin() {
+std::string::iterator String::begin() {
     return m_data.begin();
 }
 
-const std::const_iterator String::end() const {
+const std::string::const_iterator String::end() const {
     return m_data.end();
 }
 
-std::iterator String::end() {
+std::string::iterator String::end() {
     return m_data.end();
 }
 
@@ -79,7 +81,7 @@ unsigned long String::size() const {
     return m_data.size();
 }
 unsigned long String::length() const {
-    m_data.length();
+    return m_data.length();
 }
 
 void String::clear() {

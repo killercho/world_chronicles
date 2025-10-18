@@ -22,9 +22,9 @@ class String {
     // so that they are a single package.
 
     String();
-    explicit String(const std::string& otherString);
-    explicit String(const char* otherString);
-    explicit String(const String& otherString);
+    String(const std::string& otherString);
+    String(const char* otherString);
+    String(const String& otherString);
 
     String& operator=(const String& otherString);
     String& operator=(const std::string& otherString);
@@ -55,10 +55,10 @@ class String {
     const char* c_str() const;
 
     // Iterators for the data inside the class.
-    const std::const_iterator begin() const;
-    std::iterator             begin();
-    const std::const_iterator end() const;
-    std::iterator             end();
+    const std::string::const_iterator begin() const;
+    std::string::iterator             begin();
+    const std::string::const_iterator end() const;
+    std::string::iterator             end();
 
     // Returns true if the string is empty.
     bool empty() const;
