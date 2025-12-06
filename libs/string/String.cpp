@@ -141,3 +141,8 @@ std::vector<String> String::split(const String& delimiter) const {
     result.emplace_back(dataCopy);
     return result;
 }
+
+std::ostream& operator<<(std::ostream& out, const String& toPrint) {
+    out << toPrint.m_data;
+    return out;
+}

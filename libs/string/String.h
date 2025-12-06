@@ -118,17 +118,20 @@ class String {
         return Type();
     }
 
-    // Split the current string by a delimiter given
+    // Split the current string by a delimiter given.
     std::vector<String> split(const String& delimiter) const;
+
+    // Overload the operator<< so that printing can be easier.
+    friend std::ostream& operator<<(std::ostream& out, const String& toPrint);
 };
 
-// Get any type of data as the custom string type, for everything but bool.
-template<typename Type, std::enable_if_t<!std::is_same_v<Type, bool>>>
-String ToString(const Type type) {
+// Get any type of data as the custom string type, for every arithmetical type.
+template<typename Type>
+typename std::enable_if_t<!std::is_same_v<Type, bool>, String> ToString(const Type type) {
     return std::to_string(type);
 }
 // The same function but only for the boolean conversions.
-template<typename Type, std::enable_if_t<std::is_same_v<Type, bool>>>
-String ToString(const Type type) {
+template<typename Type>
+typename std::enable_if_t<std::is_same_v<Type, bool>, String> ToString(const Type type) {
     return (type ? "true" : "false");
 }
