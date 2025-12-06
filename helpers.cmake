@@ -14,5 +14,7 @@ function(declare_test test_name files test_folder)
         gtest_discover_tests(${test_name})
         # Add the test to CTest using add_test
         add_test(NAME ${test_name} COMMAND $<TARGET_FILE:${test_name}>)
+
+        message(STATUS "Test '${test_name}' added with files: (${files})")
     endif()
 endfunction()

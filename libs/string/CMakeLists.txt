@@ -4,7 +4,6 @@ file(GLOB LIBRARY_SOURCE
     String.cpp
     String.h
 )
-
 add_library(${LIBRARY_NAME} ${LIBRARY_SOURCE})
 
-declare_test(string_tests ${LIBRARY_SOURCE} string_tests)
+declare_test(string_tests tests/StringTests.cpp string_tests)
