@@ -1,10 +1,10 @@
 #include <Constants.h>
 #include <buildings/Castle.h>
-
 #include <string/String.h>
-
 #include <raygui/raygui.h>
 #include <raylib.h>
+
+#include <iostream>
 
 int main() {
     InitWindow(
@@ -24,6 +24,7 @@ int main() {
         GuiLabel(Rectangle(100, 100, 150, 50), curr.c_str());
         if (GuiButton(Rectangle(50, 50, 50, 50), "Click to change the text!")) {
             curr = "Label should be full now";
+            std::cout << String("Button was clicked!\n");
         }
 
         EndDrawing();
