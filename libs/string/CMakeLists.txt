@@ -1,9 +1,13 @@
 set(LIBRARY_NAME "string")
 
-file(GLOB LIBRARY_SOURCE
+set(LIBRARY_SOURCE
     String.cpp
     String.h
 )
-add_library(${LIBRARY_NAME} ${LIBRARY_SOURCE})
+add_library(${LIBRARY_NAME} "${LIBRARY_SOURCE}")
 
-declare_test(string_tests tests/StringTests.cpp string_tests)
+set(TEST_SOURCE
+    tests/StringTests.cpp
+    String.cpp
+)
+declare_test(string_tests "${TEST_SOURCE}" string_tests)
