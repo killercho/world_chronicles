@@ -1,3 +1,6 @@
+#ifndef LIBS_STRING_STRING_H_
+#define LIBS_STRING_STRING_H_
+
 #include <stdexcept>
 #include <string>
 #include <type_traits>
@@ -135,3 +138,5 @@ template<typename Type>
 typename std::enable_if_t<std::is_same_v<Type, bool>, String> ToString(const Type type) {
     return (type ? "true" : "false");
 }
+
+#endif  // LIBS_STRING_STRING_H_
