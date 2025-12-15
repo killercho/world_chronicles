@@ -6,7 +6,6 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Werror -pedantic -std=c++23")
-set(CMAKE_BUILD_TYPE Debug)
 
 option(ENABLE_TESTS "Enable the library tests" OFF)
 
@@ -53,9 +52,14 @@ add_subdirectory(libs)
 target_link_libraries(${PROJECT_NAME} PRIVATE raygui)
 target_link_libraries(${PROJECT_NAME} PRIVATE string)
 
-# Setting ASSETS_PATH
+# Setting release and debug constants and assets
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
     target_compile_definitions(${PROJECT_NAME} PUBLIC ASSETS_PATH="${CMAKE_CURRENT_SOURCE_DIR}/assets/")
+    target_compile_definitions(${PROJECT_NAME} PUBLIC CONSTANTS_PATH="${CMAKE_CURRENT_SOURCE_DIR}/constants/")
 elseif(CMAKE_BUILD_TYPE STREQUAL "Release")
     target_compile_definitions(${PROJECT_NAME} PUBLIC ASSETS_PATH="./assets")
+    target_compile_definitions(${PROJECT_NAME} PUBLIC CONSTANTS_PATH="./constants/")
+    file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/constants/" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/constants/")
+else()
+    message(STATUS "Nothing is enabled")
 endif()

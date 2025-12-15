@@ -49,7 +49,7 @@ let
 
         # Run the cmake inside of the build folder to generate the cmake files
         # and go back to the root folder
-        cd build && cmake .. && cd ..
+        cd build && cmake .. -DENABLE_TESTS=On -DCMAKE_BUILD_TYPE=Debug && cd ..
 
         # Start user's shell
         # The start of the new user shell needs to happen after
