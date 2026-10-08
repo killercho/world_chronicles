@@ -9,6 +9,9 @@ set(LIBRARY_SOURCE
 )
 add_library(${LIBRARY_NAME} "${LIBRARY_SOURCE}")
 
+target_include_directories(${LIBRARY_NAME} PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/../string")
+target_link_libraries(${LIBRARY_NAME} PRIVATE string)
+
 set(TEST_SOURCE
     tests/IniParserTests.cpp
     IniParser.cpp
