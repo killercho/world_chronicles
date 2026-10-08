@@ -7,35 +7,35 @@
 TEST(StringTests, StringConstructor) {
     String emptyString;
     EXPECT_STREQ(emptyString.c_str(), "");
-    EXPECT_TRUE(emptyString.empty());
+    EXPECT_TRUE(emptyString.Empty());
 
     String fromStdString(std::string("normalString"));
     EXPECT_STREQ(fromStdString.c_str(), "normalString");
-    EXPECT_FALSE(fromStdString.empty());
+    EXPECT_FALSE(fromStdString.Empty());
 
     String fromCharPtr("something");
     EXPECT_STREQ(fromCharPtr.c_str(), "something");
-    EXPECT_FALSE(fromCharPtr.empty());
+    EXPECT_FALSE(fromCharPtr.Empty());
 
     String fromOtherString(fromCharPtr);
     EXPECT_STREQ(fromOtherString.c_str(), "something");
-    EXPECT_FALSE(fromOtherString.empty());
+    EXPECT_FALSE(fromOtherString.Empty());
 
     std::string otherString = "something";
     String      fromMoveOther(std::move(otherString));
     EXPECT_STREQ(fromMoveOther.c_str(), "something");
-    EXPECT_FALSE(fromMoveOther.empty());
+    EXPECT_FALSE(fromMoveOther.Empty());
 
     String fromMove(std::move(fromMoveOther));
     EXPECT_STREQ(fromMove.c_str(), "something");
-    EXPECT_FALSE(fromMove.empty());
+    EXPECT_FALSE(fromMove.Empty());
 }
 
 TEST(StringTests, StringOperatorEquals) {
     String myString;
-    EXPECT_TRUE(myString.empty());
+    EXPECT_TRUE(myString.Empty());
     myString = "something";
-    EXPECT_FALSE(myString.empty());
+    EXPECT_FALSE(myString.Empty());
     EXPECT_STREQ(myString.c_str(), "something");
 
     std::string normalString = "normalString";
@@ -58,9 +58,9 @@ TEST(StringTests, DataGetters) {
     myString[0] = 'b';
     EXPECT_EQ(myString[0], 'b');
 
-    EXPECT_EQ(myString.at(1), 'o');
-    myString.at(1) = 's';
-    EXPECT_EQ(myString.at(1), 's');
+    EXPECT_EQ(myString.At(1), 'o');
+    myString.At(1) = 's';
+    EXPECT_EQ(myString.At(1), 's');
 }
 
 TEST(StringTests, Iterators) {
@@ -74,12 +74,12 @@ TEST(StringTests, Iterators) {
 
 TEST(StringTests, SizeManipulations) {
     String myString = "something";
-    EXPECT_FALSE(myString.empty());
-    EXPECT_EQ(myString.size(), std::string("something").size());
-    EXPECT_EQ(myString.length(), std::string("something").length());
-    EXPECT_FALSE(myString.empty());
-    EXPECT_NO_FATAL_FAILURE(myString.clear());
-    EXPECT_TRUE(myString.empty());
+    EXPECT_FALSE(myString.Empty());
+    EXPECT_EQ(myString.Size(), std::string("something").size());
+    EXPECT_EQ(myString.Length(), std::string("something").length());
+    EXPECT_FALSE(myString.Empty());
+    EXPECT_NO_FATAL_FAILURE(myString.Clear());
+    EXPECT_TRUE(myString.Empty());
     EXPECT_STREQ(myString.c_str(), "");
 }
 
@@ -101,9 +101,9 @@ TEST(StringTests, Addition) {
 
 TEST(StringTests, Finding) {
     String myString = "something!tofind!";
-    EXPECT_EQ(myString.find('s'), 0);
-    EXPECT_EQ(myString.find("to"), 10);
-    EXPECT_EQ(myString.find("?"), -1);
+    EXPECT_EQ(myString.Find('s'), 0);
+    EXPECT_EQ(myString.Find("to"), 10);
+    EXPECT_EQ(myString.Find("?"), -1);
 }
 
 TEST(StringTests, Comparisons) {

@@ -28,7 +28,8 @@ String& String::operator=(const char* otherString) {
 }
 
 String::String(std::string&& otherString) : m_data(std::move(otherString)) { }
-String::String(String&& otherString) : m_data(std::move(otherString).GetData()) { }
+String::String(String&& otherString)
+    : m_data(std::move(otherString).GetData()) { }
 
 const std::string& String::GetData() const {
     return m_data;
@@ -46,11 +47,11 @@ const char String::operator[](const unsigned int position) const {
     return m_data[position];
 }
 
-char& String::at(const unsigned int position) {
+char& String::At(const unsigned int position) {
     return m_data.at(position);
 }
 
-const char String::at(const unsigned int position) const {
+const char String::At(const unsigned int position) const {
     return m_data.at(position);
 }
 
@@ -74,17 +75,17 @@ std::string::iterator String::end() {
     return m_data.end();
 }
 
-bool String::empty() const {
+bool String::Empty() const {
     return m_data.empty();
 }
-unsigned long String::size() const {
+unsigned long String::Size() const {
     return m_data.size();
 }
-unsigned long String::length() const {
+unsigned long String::Length() const {
     return m_data.length();
 }
 
-void String::clear() {
+void String::Clear() {
     return m_data.clear();
 }
 
@@ -97,19 +98,19 @@ String& String::operator+=(char other) {
     return *this;
 }
 
-unsigned long String::find(const String& target) const {
+unsigned long String::Find(const String& target) const {
     return m_data.find(target.GetData());
 }
 
-unsigned long String::find(char target) const {
+unsigned long String::Find(char target) const {
     return m_data.find(target);
 }
 
-bool String::contains(const String& target) const {
+bool String::Contains(const String& target) const {
     return m_data.contains(target.GetData());
 }
 
-bool String::contains(char target) const {
+bool String::Contains(char target) const {
     return m_data.contains(target);
 }
 
@@ -125,7 +126,7 @@ bool String::operator!=(const String& other) const {
     return m_data != other.GetData();
 }
 
-std::vector<String> String::split(const String& delimiter) const {
+std::vector<String> String::Split(const String& delimiter) const {
     std::vector<String> result;
 
     const std::string& delimiterNormalString = delimiter.GetData();
@@ -145,4 +146,8 @@ std::vector<String> String::split(const String& delimiter) const {
 std::ostream& operator<<(std::ostream& out, const String& toPrint) {
     out << toPrint.m_data;
     return out;
+}
+
+std::filesystem::path String::ToPath() const noexcept {
+    return std::filesystem::path(m_data);
 }

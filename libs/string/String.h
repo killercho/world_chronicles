@@ -5,6 +5,7 @@
 #include <string>
 #include <type_traits>
 #include <vector>
+#include <filesystem>
 
 // A custom string class that encorporates std::string as a member
 // and enchances its uses.
@@ -18,11 +19,6 @@ class String {
 
  public:
     static constexpr unsigned long NPOS = -1;
-
-    // TODO: Create tests for the string functionality
-    // preferably with the gtest library.
-    // These tests need to be defined in the current folder together with the string
-    // so that they are a single package.
 
     String();
     String(const std::string& otherString);
@@ -49,10 +45,10 @@ class String {
     const char operator[](const unsigned int position) const;
     // Return the position-th element of the string for modification,
     // does checks for whether it is out of range.
-    char& at(const unsigned int position);
+    char& At(const unsigned int position);
     // Return the position-th element of the string as a copy, forbidding modification
     // does checks for whether it is out of range.
-    const char at(const unsigned int position) const;
+    const char At(const unsigned int position) const;
 
     // Returns the const char* of the std::string inside.
     const char* c_str() const;
@@ -64,13 +60,13 @@ class String {
     std::string::iterator             end();
 
     // Returns true if the string is empty.
-    bool empty() const;
+    bool Empty() const;
     // Return the size of the data in the string.
-    unsigned long size() const;
-    unsigned long length() const;
+    unsigned long Size() const;
+    unsigned long Length() const;
 
     // Clears the contents of the data.
-    void clear();
+    void Clear();
 
     // Adds the other string to the end of the current string.
     // The rest of the data types that can be used (like const char* and char)
@@ -80,12 +76,12 @@ class String {
 
     // Return the index of the first occurence of the target string/char
     // into the current string.
-    unsigned long find(const String& target) const;
-    unsigned long find(char target) const;
+    unsigned long Find(const String& target) const;
+    unsigned long Find(char target) const;
 
     // Returns true if the string/char is contained into the current string.
-    bool contains(const String& target) const;
-    bool contains(char target) const;
+    bool Contains(const String& target) const;
+    bool Contains(char target) const;
 
     // Returns a new string that is the concatination of the current string
     // with the other string given.
@@ -117,12 +113,16 @@ class String {
             }
             return false;
         }
-        throw std::runtime_error("Cast from string failed! Type not recognized!");
+        throw std::runtime_error(
+            "Cast from string failed! Type not recognized!");
         return Type();
     }
 
     // Split the current string by a delimiter given.
-    std::vector<String> split(const String& delimiter) const;
+    std::vector<String> Split(const String& delimiter) const;
+
+    // Returns a path constructed from the string.
+    std::filesystem::path ToPath() const noexcept;
 
     // Overload the operator<< so that printing can be easier.
     friend std::ostream& operator<<(std::ostream& out, const String& toPrint);
@@ -130,13 +130,28 @@ class String {
 
 // Get any type of data as the custom string type, for every arithmetical type.
 template<typename Type>
-typename std::enable_if_t<!std::is_same_v<Type, bool>, String> ToString(const Type type) {
+typename std::enable_if_t<!std::is_same_v<Type, bool>, String>
+ToString(const Type type) {
     return std::to_string(type);
 }
 // The same function but only for the boolean conversions.
 template<typename Type>
-typename std::enable_if_t<std::is_same_v<Type, bool>, String> ToString(const Type type) {
+typename std::enable_if_t<std::is_same_v<Type, bool>, String>
+ToString(const Type type) {
     return (type ? "true" : "false");
+}
+
+template<> struct std::hash<String> {
+    inline size_t operator()(const String& str) const {
+        return std::hash<std::string>{}(str.GetData());
+    }
+};
+
+inline String operator+(const char* left, const String& right) {
+    return String(left) + right;
+}
+inline String operator+(const std::string& left, const String& right) {
+    return String(left) + right;
 }
 
 #endif  // LIBS_STRING_STRING_H_
