@@ -14,6 +14,7 @@ target_compile_options(raygui INTERFACE
     -Wno-error
     -Wno-unused-result
     -Wno-stringop-overflow
+    -Wno-unused-but-set-variable
 )
 
 # Raygui depends on the raylib library for some stuff
