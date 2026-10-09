@@ -81,6 +81,16 @@ TEST(StringTests, SizeManipulations) {
     EXPECT_NO_FATAL_FAILURE(myString.Clear());
     EXPECT_TRUE(myString.Empty());
     EXPECT_STREQ(myString.c_str(), "");
+
+    myString = "[Section[]]";
+    EXPECT_NO_FATAL_FAILURE(myString.Remove("[", true));
+    EXPECT_STREQ(myString.c_str(), "Section]]");
+    EXPECT_NO_FATAL_FAILURE(myString.Remove("]"));
+    EXPECT_STREQ(myString.c_str(), "Section]");
+    EXPECT_NO_FATAL_FAILURE(myString.Remove("]", true));
+    EXPECT_STREQ(myString.c_str(), "Section");
+    EXPECT_NO_FATAL_FAILURE(myString.Remove("Sec"));
+    EXPECT_STREQ(myString.c_str(), "tion");
 }
 
 TEST(StringTests, Addition) {

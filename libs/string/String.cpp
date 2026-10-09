@@ -162,6 +162,17 @@ void String::Trim() {
                  m_data.end());
 }
 
+void String::Remove(const String& other, const bool bRemoveAll) {
+    unsigned long occurancePosition = Find(other);
+    while (occurancePosition != std::string::npos) {
+        m_data.erase(occurancePosition, other.Size());
+        occurancePosition = Find(other);
+        if (!bRemoveAll) {
+            break;
+        }
+    }
+}
+
 std::ostream& operator<<(std::ostream& out, const String& toPrint) {
     out << toPrint.m_data;
     return out;

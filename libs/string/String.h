@@ -131,6 +131,10 @@ class String {
     // without going into the string content itself.
     void Trim();
 
+    // Removes the given string from the current string.
+    // Removes either all the occurances or only the first one.
+    void Remove(const String& other, const bool bRemoveAll = false);
+
     // Overload the operator<< so that printing can be easier.
     friend std::ostream& operator<<(std::ostream& out, const String& toPrint);
 };
