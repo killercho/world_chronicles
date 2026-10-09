@@ -5,6 +5,7 @@ set(LIBRARY_SOURCE
     String.h
 )
 add_library(${LIBRARY_NAME} "${LIBRARY_SOURCE}")
+target_include_directories(${LIBRARY_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/..")
 
 set(TEST_SOURCE
     tests/StringTests.cpp

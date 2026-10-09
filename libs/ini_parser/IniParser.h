@@ -1,7 +1,7 @@
 #ifndef LIBS_INI_PARSER_INIPARSER_H_
 #define LIBS_INI_PARSER_INIPARSER_H_
 
-#include <String.h>
+#include <string/String.h>
 #include "SectionParser.h"
 
 class IniParser {
