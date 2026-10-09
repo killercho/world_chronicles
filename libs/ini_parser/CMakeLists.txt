@@ -16,4 +16,4 @@ set(TEST_SOURCE
     IniParser.cpp
     SectionParser.cpp
 )
-declare_test(ini_parser_tests "${TEST_SOURCE}" ini_parser_tests)
+declare_test_with_links(ini_parser_tests "${TEST_SOURCE}" ini_parser_tests string)
