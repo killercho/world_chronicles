@@ -151,14 +151,26 @@ TEST(StringTests, ToStrings) {
 
 TEST(StringTests, StrippingWhitespaces) {
     String test("aa a a a  aaa a a aa a a ");
-    test.Strip();
+    EXPECT_NO_FATAL_FAILURE(test.Strip());
     EXPECT_STREQ(test.c_str(), "aaaaaaaaaaaaaa");
 
     test = "";
-    test.Strip();
+    EXPECT_NO_FATAL_FAILURE(test.Strip());
     EXPECT_TRUE(test.Empty());
 
     test = "   ";
-    test.Strip();
+    EXPECT_NO_FATAL_FAILURE(test.Strip());
     EXPECT_TRUE(test.Empty());
+
+    test = "   ";
+    EXPECT_NO_FATAL_FAILURE(test.Trim());
+    EXPECT_TRUE(test.Empty());
+
+    test = "";
+    EXPECT_NO_FATAL_FAILURE(test.Trim());
+    EXPECT_TRUE(test.Empty());
+
+    test = " ajsbf  sd fs  ";
+    EXPECT_NO_FATAL_FAILURE(test.Trim());
+    EXPECT_STREQ(test.c_str(), "ajsbf  sd fs");
 }

@@ -147,6 +147,21 @@ void String::Strip() {
     m_data.erase(std::remove(m_data.begin(), m_data.end(), ' '), m_data.end());
 }
 
+void String::Trim() {
+    // Perform right trim.
+    m_data.erase(m_data.begin(),
+                 std::find_if(m_data.begin(), m_data.end(), [](const char c) {
+                     return !std::isspace(c);
+                 }));
+
+    // Perform left trim.
+    m_data.erase(std::find_if(m_data.rbegin(),
+                              m_data.rend(),
+                              [](const char c) { return !std::isspace(c); })
+                     .base(),
+                 m_data.end());
+}
+
 std::ostream& operator<<(std::ostream& out, const String& toPrint) {
     out << toPrint.m_data;
     return out;

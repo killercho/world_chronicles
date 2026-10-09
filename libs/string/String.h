@@ -127,6 +127,10 @@ class String {
     // Removes all the whitespace characters that are in the current string.
     void Strip();
 
+    // Removes the whitespaces from the left and right of the string
+    // without going into the string content itself.
+    void Trim();
+
     // Overload the operator<< so that printing can be easier.
     friend std::ostream& operator<<(std::ostream& out, const String& toPrint);
 };
