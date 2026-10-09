@@ -108,9 +108,9 @@ TEST(StringTests, Finding) {
 
 TEST(StringTests, Comparisons) {
     String myString = "something!tofind!";
-    EXPECT_TRUE(myString.contains("find"));
-    EXPECT_TRUE(myString.contains('!'));
-    EXPECT_FALSE(myString.contains('?'));
+    EXPECT_TRUE(myString.Contains("find"));
+    EXPECT_TRUE(myString.Contains('!'));
+    EXPECT_FALSE(myString.Contains('?'));
 
     myString = "something";
     EXPECT_EQ(myString, std::string("something"));
@@ -132,7 +132,7 @@ TEST(StringTests, CastsFromString) {
 TEST(StringTests, Splitter) {
     String              myString = "something!to!see!";
     std::vector<String> result;
-    EXPECT_NO_FATAL_FAILURE(result = myString.split("!"));
+    EXPECT_NO_FATAL_FAILURE(result = myString.Split("!"));
     EXPECT_STREQ(result[0].c_str(), "something");
     EXPECT_STREQ(result[1].c_str(), "to");
     EXPECT_STREQ(result[2].c_str(), "see");
