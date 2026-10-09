@@ -143,6 +143,10 @@ std::vector<String> String::Split(const String& delimiter) const {
     return result;
 }
 
+void String::Strip() {
+    m_data.erase(std::remove(m_data.begin(), m_data.end(), ' '), m_data.end());
+}
+
 std::ostream& operator<<(std::ostream& out, const String& toPrint) {
     out << toPrint.m_data;
     return out;

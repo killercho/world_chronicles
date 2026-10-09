@@ -148,3 +148,17 @@ TEST(StringTests, ToStrings) {
     myString = ToString(3.14);
     EXPECT_STREQ(myString.c_str(), "3.140000");
 }
+
+TEST(StringTests, StrippingWhitespaces) {
+    String test("aa a a a  aaa a a aa a a ");
+    test.Strip();
+    EXPECT_STREQ(test.c_str(), "aaaaaaaaaaaaaa");
+
+    test = "";
+    test.Strip();
+    EXPECT_TRUE(test.Empty());
+
+    test = "   ";
+    test.Strip();
+    EXPECT_TRUE(test.Empty());
+}

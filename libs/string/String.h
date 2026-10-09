@@ -124,6 +124,9 @@ class String {
     // Returns a path constructed from the string.
     std::filesystem::path ToPath() const noexcept;
 
+    // Removes all the whitespace characters that are in the current string.
+    void Strip();
+
     // Overload the operator<< so that printing can be easier.
     friend std::ostream& operator<<(std::ostream& out, const String& toPrint);
 };
