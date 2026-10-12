@@ -52,7 +52,7 @@ class IniParser {
     // Throws an error if the type is not correct for the value or the section does not exist.
     template<typename ValueType,
              std::enable_if_t<std::is_fundamental_v<ValueType>, bool> = true>
-    const ValueType GetValue(const String& section, const String& name) const {
+    ValueType GetValue(const String& section, const String& name) const {
         return GetSection(section).GetValue<ValueType>(name);
     }
     // The same as the other GetValue function but for composite types,

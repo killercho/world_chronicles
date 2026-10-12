@@ -39,7 +39,7 @@ class SectionParser {
     // the variant holds.
     template<typename ValueType,
              std::enable_if_t<std::is_fundamental_v<ValueType>, bool> = true>
-    const ValueType GetValue(const String& name) const {
+    ValueType GetValue(const String& name) const {
         if (!m_allValues.contains(name)) {
             throw std::runtime_error(
                 ("Value for name '" + name + "' was not found!").c_str());
