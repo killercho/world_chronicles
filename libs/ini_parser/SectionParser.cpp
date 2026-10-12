@@ -61,7 +61,7 @@ void SectionParser::LoadSection(std::ifstream& file) noexcept {
             break;
         }
 
-        const auto& value = keyValuePair.back();
+        auto value = keyValuePair.back();
         if (keyValuePair.back()[0] == '-' &&
             std::all_of(value.begin() + 1, value.end(), [](const char c) {
                 return std::isdigit(c);
@@ -76,6 +76,9 @@ void SectionParser::LoadSection(std::ifstream& file) noexcept {
             m_allValues.insert(
                 { keyValuePair.front(), value.CastFromString<unsigned int>() });
         } else {
+            if (value.Contains('"')) {
+                value.Remove("\"", true);
+            }
             // No idea what it is so it's a string.
             m_allValues.insert({ keyValuePair.front(), value });
         }
