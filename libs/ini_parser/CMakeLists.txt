@@ -17,3 +17,8 @@ set(TEST_SOURCE
     SectionParser.cpp
 )
 declare_test_with_links(ini_parser_tests "${TEST_SOURCE}" ini_parser_tests string)
+
+if(ENABLE_TESTS)
+    message("Copied the '${CMAKE_CURRENT_SOURCE_DIR}/tests/input/' to '${CMAKE_CURRENT_BINARY_DIR}/'")
+    file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/tests/input" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}")
+endif()
