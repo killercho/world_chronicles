@@ -95,7 +95,7 @@ void IniParser::ClearError() {
 }
 
 const SectionParser& IniParser::GetSection(const String& section) const {
-    if (m_allSections.contains(section)) {
+    if (!m_allSections.contains(section)) {
         throw std::runtime_error(
             ("Section with name '" + section + "' was not found!").c_str());
     }
@@ -104,7 +104,7 @@ const SectionParser& IniParser::GetSection(const String& section) const {
 
 const std::shared_ptr<SectionParser>&
 IniParser::GetSectionPtr(const String& section) const {
-    if (m_allSections.contains(section)) {
+    if (!m_allSections.contains(section)) {
         throw std::runtime_error(
             ("Section with name '" + section + "' was not found!").c_str());
     }
