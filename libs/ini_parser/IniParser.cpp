@@ -22,7 +22,7 @@ IniParser::IniParser(const String& filename) noexcept {
 }
 
 void IniParser::LoadNewFile(const String& filename) noexcept {
-    m_fileError.Clear();
+    Clear();
     CheckFileExisting(filename);
 
     if (m_fileError.Empty()) {
@@ -83,6 +83,15 @@ void IniParser::LoadFromFile(const String& filename) noexcept {
     }
 
     file.close();
+}
+
+void IniParser::Clear() {
+    m_allSections.clear();
+    ClearError();
+}
+
+void IniParser::ClearError() {
+    m_fileError.Clear();
 }
 
 const SectionParser& IniParser::GetSection(const String& section) const {

@@ -27,7 +27,8 @@ class IniParser {
  public:
     // Parses the filename given into the sections and becomes ready for use.
     explicit IniParser(const String& filename) noexcept;
-    ~IniParser() = default;
+    IniParser() noexcept = default;
+    ~IniParser()         = default;
 
     // Loads the new file that was given.
     // All the old information is cleared (including the error state).
@@ -35,6 +36,11 @@ class IniParser {
 
     // Returns the latest error that might have occured.
     const String& GetLatestError() const noexcept;
+
+    // Clears all the sections and the error;
+    void Clear();
+    // Clears only the error code.
+    void ClearError();
 
     // Getters for the section if taking the whole section is more appropriate.
     // Throws an error if the section was not found.
@@ -45,24 +51,16 @@ class IniParser {
     // Returns the value from the section that was requested.
     // Throws an error if the type is not correct for the value or the section does not exist.
     template<typename ValueType,
-             std::enable_if<std::is_fundamental_v<ValueType>>>
+             std::enable_if_t<std::is_fundamental_v<ValueType>, bool> = true>
     const ValueType GetValue(const String& section, const String& name) const {
-        if (!m_allSections.contains(section)) {
-            throw std::runtime_error(
-                ("Section with name '" + section + "' was not found!").c_str());
-        }
-        return m_allSections.at(section)->GetValue<ValueType>(name);
+        return GetSection(section).GetValue<ValueType>(name);
     }
     // The same as the other GetValue function but for composite types,
     // so that they are not copied.
     template<typename ValueType,
-             std::enable_if<!std::is_fundamental_v<ValueType>>>
+             std::enable_if_t<!std::is_fundamental_v<ValueType>, bool> = true>
     const ValueType& GetValue(const String& section, const String& name) const {
-        if (!m_allSections.contains(section)) {
-            throw std::runtime_error(
-                ("Section with name '" + section + "' was not found!").c_str());
-        }
-        return m_allSections.at(section)->GetValue<ValueType>(name);
+        return GetSection(section).GetValue<ValueType>(name);
     }
 };
 

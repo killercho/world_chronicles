@@ -38,7 +38,7 @@ class SectionParser {
     // Throws an error if the value name does not exist in the names or the type requested is not what
     // the variant holds.
     template<typename ValueType,
-             std::enable_if<std::is_fundamental_v<ValueType>>>
+             std::enable_if_t<std::is_fundamental_v<ValueType>, bool> = true>
     const ValueType GetValue(const String& name) const {
         if (!m_allValues.contains(name)) {
             throw std::runtime_error(
@@ -57,7 +57,7 @@ class SectionParser {
     // The same as the other GetValue function but for composite types,
     // so that they are not copied.
     template<typename ValueType,
-             std::enable_if<!std::is_fundamental_v<ValueType>>>
+             std::enable_if_t<!std::is_fundamental_v<ValueType>, bool> = true>
     const ValueType& GetValue(const String& name) const {
         if (!m_allValues.contains(name)) {
             throw std::runtime_error(
