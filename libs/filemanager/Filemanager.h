@@ -19,6 +19,9 @@ class Filemanager {
     // file at the end of the path given that exists.
     bool DoesFileExist(const String& filename) const;
 
+    // Takes a filename and creates the necessary parent directories if they do not exist.
+    void CreateParentDirs(const String& filename) const;
+
  public:
     Filemanager() = default;
     ~Filemanager();
