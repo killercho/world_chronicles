@@ -31,7 +31,9 @@ bool Filemanager::DoesFileExist(const String& filename) const {
 
 void Filemanager::CreateParentDirs(const String& filename) const {
     const std::filesystem::path filePath(filename.c_str());
-    std::filesystem::create_directories(filePath.parent_path());
+    if (filePath.has_parent_path()) {
+        std::filesystem::create_directories(filePath.parent_path());
+    }
 }
 
 std::ifstream& Filemanager::GetOpenedInputFile(const String& filename) {
