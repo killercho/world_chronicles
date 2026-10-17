@@ -1,18 +1,30 @@
-{ pkgs ? import <nixpkgs> { } }:
+{ pkgs   ? import <nixpkgs> { }
+, system ? pkgs.stdenv.hostPlatform.system
+, nixGL  ? pkgs.fetchFromGitHub { owner = "nix-community"; repo = "nixGL"; rev = "b6105297e6f0cd041670c3e8628394d4ee247ed5"; hash = "sha256-fbRQzIGPkjZa83MowjbD2ALaJf9y6KMDdJBQMKFeY/8="; }
+}:
 
 let
+  isIntelX86Platform = system == "x86_64-linux";
+  pkgs_nixGL = import nixGL {
+    inherit pkgs;
+    enable32bits = isIntelX86Platform;
+    enableIntelX86Extensions = isIntelX86Platform;
+  };
+
   shellDrv =
-    { raylib
+    { mkShell
+    , raylib
     , libxkbcommon
     , cmake
     , libclang
     , gdb
     , gnumake
     , tree
+    , nixGLDefault
     , ...
     }:
-    pkgs.mkShell {
-      nativeBuildInputs = [ raylib libxkbcommon cmake libclang gdb gnumake tree ];
+    mkShell {
+      nativeBuildInputs = [ raylib libxkbcommon cmake libclang gdb gnumake tree nixGLDefault ];
       buildInputs = [ ];
       env.NIX_ENFORCE_PURITY = 0;
 
@@ -63,4 +75,4 @@ let
       '';
     };
 in
-shellDrv pkgs
+  pkgs.callPackage shellDrv (pkgs_nixGL // pkgs_nixGL.auto)
