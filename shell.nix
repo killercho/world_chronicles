@@ -1,4 +1,4 @@
-{ pkgs ? import <nixpkgs> { }
+{ pkgs ? import <nixpkgs> { config.allowUnfree = true; }
 , system ? pkgs.stdenv.hostPlatform.system
 , nixGL ? pkgs.fetchFromGitHub { owner = "nix-community"; repo = "nixGL"; rev = "b6105297e6f0cd041670c3e8628394d4ee247ed5"; hash = "sha256-fbRQzIGPkjZa83MowjbD2ALaJf9y6KMDdJBQMKFeY/8="; }
 }:
@@ -20,11 +20,11 @@ let
     , gdb
     , gnumake
     , tree
-    , nixGLDefault
+    , nixGLIntel
     , ...
     }:
     mkShell {
-      nativeBuildInputs = [ raylib libxkbcommon cmake libclang gdb gnumake tree nixGLDefault ];
+      nativeBuildInputs = [ raylib libxkbcommon cmake libclang gdb gnumake tree nixGLIntel ];
       buildInputs = [ ];
       env.NIX_ENFORCE_PURITY = 0;
 
