@@ -1,6 +1,6 @@
-{ pkgs   ? import <nixpkgs> { }
+{ pkgs ? import <nixpkgs> { }
 , system ? pkgs.stdenv.hostPlatform.system
-, nixGL  ? pkgs.fetchFromGitHub { owner = "nix-community"; repo = "nixGL"; rev = "b6105297e6f0cd041670c3e8628394d4ee247ed5"; hash = "sha256-fbRQzIGPkjZa83MowjbD2ALaJf9y6KMDdJBQMKFeY/8="; }
+, nixGL ? pkgs.fetchFromGitHub { owner = "nix-community"; repo = "nixGL"; rev = "b6105297e6f0cd041670c3e8628394d4ee247ed5"; hash = "sha256-fbRQzIGPkjZa83MowjbD2ALaJf9y6KMDdJBQMKFeY/8="; }
 }:
 
 let
@@ -75,4 +75,4 @@ let
       '';
     };
 in
-  pkgs.callPackage shellDrv (pkgs_nixGL // pkgs_nixGL.auto)
+pkgs.callPackage shellDrv (pkgs_nixGL // pkgs_nixGL.auto)
