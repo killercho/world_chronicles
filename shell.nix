@@ -35,6 +35,8 @@ let
 
         echo "Creating the correct raylib clangd compile file under the '.clangd' name..."
         RAYLIB_NIX_PACKAGE_PATH=$(nix-instantiate --eval-only --expr '(import <nixpkgs> {}).raylib.outPath')
+        # Remove the quotes from the package name.
+        RAYLIB_NIX_PACKAGE_PATH=$(echo $RAYLIB_NIX_PACKAGE_PATH | tr -d '"')
         echo "
         CompileFlags:
           Add: -I$RAYLIB_NIX_PACKAGE_PATH/include" > .clangd
