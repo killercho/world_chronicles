@@ -5,11 +5,27 @@
 
 let
   isIntelX86Platform = system == "x86_64-linux";
-  pkgs_nixGL = import nixGL {
-    inherit pkgs;
-    enable32bits = isIntelX86Platform;
-    enableIntelX86Extensions = isIntelX86Platform;
-  };
+  nixGL_pkgs = let
+      repo =
+        { stdenv
+        }:
+        stdenv.mkDerivation {
+          name = "repo_nixGL";
+          version = "latest";
+          src = nixGL;
+
+          postPatch = "sed -i '/kernel =/d' nixGL.nix";
+          installPhase = ''mkdir -p "$out"; mv * "$out"'';
+        };
+
+      conf =
+        {
+          inherit pkgs;
+          enable32bits = isIntelX86Platform;
+          enableIntelX86Extensions = isIntelX86Platform;
+        };
+    in
+      import (pkgs.callPackage repo {}) conf;
 
   shellDrv =
     { mkShell
@@ -20,11 +36,10 @@ let
     , gdb
     , gnumake
     , tree
-    , nixGLIntel
-    , ...
+    , nixGL
     }:
     mkShell {
-      nativeBuildInputs = [ raylib libxkbcommon cmake libclang gdb gnumake tree nixGLIntel ];
+      nativeBuildInputs = [ raylib libxkbcommon cmake libclang gdb gnumake tree nixGL.auto.nixGLDefault ];
       buildInputs = [ ];
       env.NIX_ENFORCE_PURITY = 0;
 
@@ -77,4 +92,4 @@ let
       '';
     };
 in
-pkgs.callPackage shellDrv (pkgs_nixGL // pkgs_nixGL.auto)
+pkgs.callPackage shellDrv { nixGL = nixGL_pkgs; }
