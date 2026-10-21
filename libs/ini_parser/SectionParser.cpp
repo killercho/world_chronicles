@@ -18,18 +18,21 @@ void SectionParser::ClearError() {
 void SectionParser::LoadSection(std::ifstream& file) noexcept {
     Clear();
 
-    std::string lineGetter;
+    std::string  lineGetter;
+    unsigned int lastLinePosition = 0;
     while (std::getline(file, lineGetter)) {
         String actualLine(lineGetter);
         actualLine.Trim();
         if (actualLine.Empty()) {
             // Only spaces on the line.
+            lastLinePosition = file.tellg();
             continue;
         }
 
         auto afterComment = actualLine.Split("#").back();
         if (afterComment.Empty()) {
             // Only a comment on the line.
+            lastLinePosition = file.tellg();
             continue;
         }
 
@@ -83,4 +86,8 @@ void SectionParser::LoadSection(std::ifstream& file) noexcept {
             m_allValues.insert({ keyValuePair.front(), value });
         }
     }
+
+    // When the section ends the last line needs to be returned into the file pointer.
+    // Otheriwise a start of another section could be missed.
+    file.seekg(lastLinePosition);
 }
