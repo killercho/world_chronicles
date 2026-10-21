@@ -24,18 +24,6 @@ int main() {
 
     String curr = "Label is empty";
     while (!WindowShouldClose()) {
-        BeginDrawing();
-        ClearBackground(RAYWHITE);
-        DrawText("This is a basic raylib window", 190, 200, 20, BLACK);
-
-        GuiLabel(Rectangle(100, 100, 150, 50), curr.c_str());
-        if (GuiButton(Rectangle(50, 50, 50, 50), "Click to change the text!")) {
-            curr = "Label should be full now";
-            std::cout << String("Button was clicked!\n");
-        }
-
-        EndDrawing();
-
         const Vector2 mousePos = GetMousePosition();
         if (!bPlaced && IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
             castleTest->SetCurrentPosition(mousePos);
@@ -44,6 +32,20 @@ int main() {
         } else if (!bPlaced) {
             castleTest->SetCurrentPosition(mousePos);
         }
+
+        BeginDrawing();
+        ClearBackground(RAYWHITE);
+        DrawText("This is a basic raylib window", 190, 200, 20, BLACK);
+
+        castleTest->Draw();
+
+        GuiLabel(Rectangle(100, 100, 150, 50), curr.c_str());
+        if (GuiButton(Rectangle(50, 50, 50, 50), "Click to change the text!")) {
+            curr = "Label should be full now";
+            std::cout << String("Button was clicked!\n");
+        }
+
+        EndDrawing();
     }
 
     CloseWindow();
