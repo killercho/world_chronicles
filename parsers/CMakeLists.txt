@@ -9,3 +9,6 @@ set(LIBRARY_SOURCE
 )
 
 add_library(${LIBRARY_NAME} "${LIBRARY_SOURCE}")
+target_link_libraries(${LIBRARY_NAME} PRIVATE string)
+target_link_libraries(${LIBRARY_NAME} PRIVATE ini_parser)
+target_link_libraries(${LIBRARY_NAME} PRIVATE filemanager)
