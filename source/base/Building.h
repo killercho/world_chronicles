@@ -6,10 +6,7 @@
 class Building {
  protected:
     // Health that the unit has currently
-    int m_health;
-
-    // Defense that the building has, used when other entities are attacking
-    int m_defense;
+    int m_health{ 0 };
 
  public:
     Building()                           = default;
