@@ -32,6 +32,10 @@ int main() {
             castleTest->SetCurrentPosition(mousePos);
         }
 
+        if (CheckCollisionPointRec(mousePos, castleTest->GetRectangle())) {
+            std::cout << String("Mouse on the castle!\n");
+        }
+
         BeginDrawing();
         ClearBackground(RAYWHITE);
         DrawText("This is a basic raylib window", 190, 200, 20, BLACK);

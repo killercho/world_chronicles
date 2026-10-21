@@ -14,6 +14,11 @@ void Building::LoadTexture(const String&      filename,
     m_buildingTexture = LoadTextureFromImage(newImage);
 
     UnloadImage(newImage);
+
+    m_rect.x      = m_positionX;
+    m_rect.y      = m_positionY;
+    m_rect.width  = m_buildingTexture.width;
+    m_rect.height = m_buildingTexture.height;
 }
 
 int Building::GetHealth() const noexcept {
@@ -23,12 +28,18 @@ int Building::GetHealth() const noexcept {
 void Building::SetCurrentPosition(const Vector2 newPos) {
     m_positionX = newPos.x;
     m_positionY = newPos.y;
+
+    m_rect.x = m_positionX;
+    m_rect.y = m_positionY;
 }
 
 void Building::SetCurrentPosition(const unsigned int newX,
                                   const unsigned int newY) {
     m_positionX = newX;
     m_positionY = newY;
+
+    m_rect.x = m_positionX;
+    m_rect.y = m_positionY;
 }
 
 void Building::SetPlaced(const bool bPlaced) {
@@ -37,4 +48,8 @@ void Building::SetPlaced(const bool bPlaced) {
 
 bool Building::IsPlaced() const noexcept {
     return m_bPlaced;
+}
+
+Rectangle Building::GetRectangle() const noexcept {
+    return m_rect;
 }

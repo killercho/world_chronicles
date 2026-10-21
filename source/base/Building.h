@@ -20,6 +20,10 @@ class Building {
     // and different states of the building are introduced.
     Texture2D m_buildingTexture;
 
+    // The rectangle made by the x and y and the texture size.
+    // Kept here to avoid recalculation on frames that do not move.
+    Rectangle m_rect;
+
     // Whether the building was placed or not.
     bool m_bPlaced{ false };
 
@@ -52,6 +56,9 @@ class Building {
 
     // Returns true if the building was placed.
     bool IsPlaced() const noexcept;
+
+    // Returns the rectangle that was calculated for the position and texture given.
+    Rectangle GetRectangle() const noexcept;
 };
 
 #endif  // SOURCE_BASE_BUILDING_H_
