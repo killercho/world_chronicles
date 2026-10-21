@@ -32,8 +32,12 @@ int main() {
             castleTest->SetCurrentPosition(mousePos);
         }
 
-        if (CheckCollisionPointRec(mousePos, castleTest->GetRectangle())) {
-            std::cout << String("Mouse on the castle!\n");
+        const bool bMouseOverCastle = CheckCollisionPointRec(mousePos, castleTest->GetRectangle());
+        if (bMouseOverCastle && IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && castleTest->IsPlaced()) {
+            std::cout << String("Castle clicked!\n");
+        } 
+        if (bMouseOverCastle && castleTest->IsPlaced()) {
+            DrawRectangleLinesEx(castleTest->GetRectangle(), 1.0f, GREEN);
         }
 
         BeginDrawing();
