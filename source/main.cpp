@@ -19,7 +19,7 @@ int main() {
     SetWindowState(FLAG_WINDOW_RESIZABLE);
 
     // TODO: Create a basic castle and check the spawning and UI
-    // std::shared_ptr<Castle> castleTest = std::make_shared<Castle>();
+    std::shared_ptr<Castle> castleTest = std::make_shared<Castle>();
 
     String curr = "Label is empty";
     while (!WindowShouldClose()) {

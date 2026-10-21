@@ -16,23 +16,8 @@ class Building {
     Building& operator=(const Building&) = default;
     Building& operator=(Building&&)      = default;
 
-    // Plays the destroy animation and destroys the building
-    // leaving a mark.
-    virtual void Destroy() = 0;
-
-    // Plays the building animation with all of
-    // the building specifications like time to build.
-    virtual void Build() = 0;
-
-    // Shows the UI of the current building
-    // allowing for technology research or unit creation.
-    virtual void ShowUI() = 0;
-
-    // Attacks another entity.
-    virtual void Attack() = 0;
-
-    // Covers the functionality for when the building takes damage.
-    virtual void TakeDamage() = 0;
+    // Returns the health of the building.
+    int GetHealth() const noexcept { return m_health; }
 };
 
 #endif  // SOURCE_BASE_BUILDING_H_

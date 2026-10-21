@@ -2,25 +2,17 @@
 #define SOURCE_BUILDINGS_CASTLE_H_
 
 #include <base/Building.h>
+#include <parsers/buildings/CastleParser.h>
 
 // Defines the castle building
 class Castle : public Building {
+ private:
+    // Holds all the constants that the castle will use during its lifetime.
+    CastleParser m_castleParser;
+
  public:
-    Castle(const Castle&)            = default;
-    ~Castle()                        = default;
-    Castle(Castle&&)                 = default;
-    Castle& operator=(const Castle&) = default;
-    Castle& operator=(Castle&&)      = default;
-
-    void Build() override;
-
-    void ShowUI() override;
-
-    void Attack() override;
-
-    void TakeDamage() override;
-
-    void Destroy() override;
+    Castle();
+    ~Castle() override = default;
 };
 
 #endif  // SOURCE_BUILDINGS_CASTLE_H_
