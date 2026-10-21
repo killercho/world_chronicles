@@ -1,15 +1,21 @@
 #include <buildings/Castle.h>
 #include <string/String.h>
-#include <filemanager/Filemanager.h>
+#include <parsers/GeneralParser.h>
 #include <raygui/raygui.h>
 #include <raylib.h>
 
 #include <iostream>
 
 int main() {
-    InitWindow(
-        general_settings::SCREEN_WIDTH, general_settings::SCREEN_HEIGHT, general_settings::TITLE);
-    SetTargetFPS(general_settings::TARGET_FPS);
+    GeneralParser windowSettings(CONSTANTS_PATH "GeneralSettings.ini");
+    if (!windowSettings.GetLatestError().Empty()) {
+        throw std::runtime_error("Error when parsing the window settings: " +
+                                 windowSettings.GetLatestError().GetData());
+    }
+    InitWindow(windowSettings.GetWidth(),
+               windowSettings.GetHeight(),
+               windowSettings.GetTitle().c_str());
+    SetTargetFPS(windowSettings.GetTargetFps());
     SetWindowState(FLAG_WINDOW_RESIZABLE);
 
     // TODO: Create a basic castle and check the spawning and UI
