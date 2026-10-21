@@ -25,3 +25,7 @@ unsigned int CastleParser::GetMaxHealth() const noexcept {
 unsigned int CastleParser::GetProductionQueueSize() const noexcept {
     return m_productionQueueSize;
 }
+
+const String& CastleParser::GetLatestError() const noexcept {
+    return m_latestError;
+}
