@@ -49,6 +49,9 @@ class Building {
 
     // Set whether the building was placed.
     void SetPlaced(const bool bPlaced);
+
+    // Returns true if the building was placed.
+    bool IsPlaced() const noexcept;
 };
 
 #endif  // SOURCE_BASE_BUILDING_H_

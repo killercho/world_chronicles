@@ -34,3 +34,7 @@ void Building::SetCurrentPosition(const unsigned int newX,
 void Building::SetPlaced(const bool bPlaced) {
     m_bPlaced = true;
 }
+
+bool Building::IsPlaced() const noexcept {
+    return m_bPlaced;
+}

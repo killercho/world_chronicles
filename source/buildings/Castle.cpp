@@ -12,7 +12,7 @@ Castle::Castle() : m_castleParser(CONSTANTS_PATH "buildings/Castle.ini") {
 }
 
 void Castle::Draw() {
-    if (!m_bPlaced) {
+    if (!IsPlaced()) {
         DrawTexture(m_buildingTexture, m_positionX, m_positionY, GREEN);
     } else {
         DrawTexture(m_buildingTexture, m_positionX, m_positionY, WHITE);
