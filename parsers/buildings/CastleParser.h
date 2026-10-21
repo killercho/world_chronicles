@@ -15,11 +15,16 @@ class CastleParser {
     // Any production that is over that size will not be added.
     unsigned int m_productionQueueSize{ 0 };
 
+    // Sprite sizes that will be visualized.
+    unsigned int m_spriteWidth;
+    unsigned int m_spriteHeight;
+
     // Error that was found during the loading.
     String m_latestError;
 
     // Loads the main settings from the section given.
     void LoadMainSettings(const SectionParser& section);
+    void LoadSpriteSettings(const SectionParser& section);
 
  public:
     // Parses the settings from the ini settings file
@@ -34,6 +39,8 @@ class CastleParser {
     // Getters for all the constants of the class.
     unsigned int GetMaxHealth() const noexcept;
     unsigned int GetProductionQueueSize() const noexcept;
+    unsigned int GetSpriteWidth() const noexcept;
+    unsigned int GetSpriteHeight() const noexcept;
 };
 
 #endif  // PARSERS_BUILDINGS_CASTLEPARSER_H_
