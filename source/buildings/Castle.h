@@ -13,6 +13,8 @@ class Castle : public Building {
  public:
     Castle();
     ~Castle() override = default;
+
+    void Draw() override;
 };
 
 #endif  // SOURCE_BUILDINGS_CASTLE_H_

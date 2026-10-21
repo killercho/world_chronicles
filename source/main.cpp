@@ -20,6 +20,7 @@ int main() {
 
     // TODO: Create a basic castle and check the spawning and UI
     std::shared_ptr<Castle> castleTest = std::make_shared<Castle>();
+    bool                    bPlaced    = false;
 
     String curr = "Label is empty";
     while (!WindowShouldClose()) {
@@ -34,6 +35,15 @@ int main() {
         }
 
         EndDrawing();
+
+        const Vector2 mousePos = GetMousePosition();
+        if (!bPlaced && IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+            castleTest->SetCurrentPosition(mousePos);
+            castleTest->SetPlaced(true);
+            bPlaced = true;
+        } else if (!bPlaced) {
+            castleTest->SetCurrentPosition(mousePos);
+        }
     }
 
     CloseWindow();
