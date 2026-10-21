@@ -1,4 +1,3 @@
-#include <Constants.h>
 #include <buildings/Castle.h>
 #include <string/String.h>
 #include <filemanager/Filemanager.h>

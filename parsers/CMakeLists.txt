@@ -1,6 +1,9 @@
 set(LIBRARY_NAME "parsers")
 
 set(LIBRARY_SOURCE
+    GeneralParser.h
+    GeneralParser.cpp
+
     # Building parsers added here:
     buildings/CastleParser.h
     buildings/CastleParser.cpp
