@@ -6,7 +6,9 @@ CastleParser::CastleParser(const String& filename) {
     IniParser parser(filename);
     LoadMainSettings(parser.GetSection("MainSettings"));
 
-    m_latestError = parser.GetLatestError();
+    if (m_latestError.Empty()) {
+        m_latestError = parser.GetLatestError();
+    }
 }
 
 void CastleParser::LoadMainSettings(const SectionParser& section) {
@@ -14,8 +16,13 @@ void CastleParser::LoadMainSettings(const SectionParser& section) {
         return;
     }
 
-    m_maxHealth           = section.GetValue<unsigned int>("Max_Health");
-    m_productionQueueSize = section.GetValue<unsigned int>("Queue_Max_Size");
+    try {
+        m_maxHealth = section.GetValue<unsigned int>("Max_Health");
+        m_productionQueueSize =
+            section.GetValue<unsigned int>("Queue_Max_Size");
+    } catch (const std::exception& e) {
+        m_latestError = e.what();
+    }
 }
 
 unsigned int CastleParser::GetMaxHealth() const noexcept {
