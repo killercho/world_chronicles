@@ -2,7 +2,7 @@
 #include <raylib.h>
 
 Building::~Building() {
-    UnloadTexture(m_buildingTexture);
+    UnloadTexture(m_texture);
 }
 
 void Building::LoadTexture(const String&      filename,
@@ -11,14 +11,14 @@ void Building::LoadTexture(const String&      filename,
     Image newImage = LoadImage(filename.c_str());
     ImageResizeNN(&newImage, sizeWidth, sizeHeight);
 
-    m_buildingTexture = LoadTextureFromImage(newImage);
+    m_texture = LoadTextureFromImage(newImage);
 
     UnloadImage(newImage);
 
     m_rect.x      = 0;
     m_rect.y      = 0;
-    m_rect.width  = m_buildingTexture.width;
-    m_rect.height = m_buildingTexture.height;
+    m_rect.width  = m_texture.width;
+    m_rect.height = m_texture.height;
 }
 
 int Building::GetHealth() const noexcept {

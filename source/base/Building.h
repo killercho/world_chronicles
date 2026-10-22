@@ -14,10 +14,9 @@ class Building {
     // Holds the texture of the building.
     // This would need to be replaced with something more when animations
     // and different states of the building are introduced.
-    Texture2D m_buildingTexture;
+    Texture2D m_texture;
 
     // The rectangle made by the x and y and the texture size.
-    // Kept here to avoid recalculation on frames that do not move.
     Rectangle m_rect;
 
     // Whether the building was placed or not.
