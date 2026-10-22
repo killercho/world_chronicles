@@ -1,4 +1,5 @@
 #include <buildings/Castle.h>
+#include <units/Villager.h>
 #include <string/String.h>
 #include <parsers/GeneralParser.h>
 #include <raygui/raygui.h>
@@ -16,31 +17,38 @@ int main() {
     SetTargetFPS(windowSettings.GetTargetFps());
     SetWindowState(FLAG_WINDOW_RESIZABLE);
 
-    std::shared_ptr<Castle> castleTest = std::make_shared<Castle>();
+    std::shared_ptr<Castle> castle = std::make_shared<Castle>();
+    std::shared_ptr<Villager> villagerOne = std::make_shared<Villager>();
+    std::shared_ptr<Villager> villagerTwo = std::make_shared<Villager>();
+
+    villagerOne->SetCurrentPosition(100, 100);
+    villagerTwo->SetCurrentPosition(200, 300);
 
     String curr = "Label is empty";
     while (!WindowShouldClose()) {
         const Vector2 mousePos      = GetMousePosition();
         const bool    bMouseClicked = IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
 
-        if (!castleTest->IsPlaced() && bMouseClicked) {
-            castleTest->SetPositionFromMouse(mousePos);
-            castleTest->SetPlaced(true);
-        } else if (!castleTest->IsPlaced()) {
-            castleTest->SetPositionFromMouse(mousePos);
+        if (!castle->IsPlaced() && bMouseClicked) {
+            castle->SetPositionFromMouse(mousePos);
+            castle->SetPlaced(true);
+        } else if (!castle->IsPlaced()) {
+            castle->SetPositionFromMouse(mousePos);
         }
 
         if (bMouseClicked &&
-            CheckCollisionPointRec(mousePos, castleTest->GetRectangle())) {
-            castleTest->SetSelected(true);
+            CheckCollisionPointRec(mousePos, castle->GetRectangle())) {
+            castle->SetSelected(true);
         } else if (bMouseClicked) {
-            castleTest->SetSelected(false);
+            castle->SetSelected(false);
         }
 
         BeginDrawing();
         ClearBackground(RAYWHITE);
 
-        castleTest->Process(mousePos);
+        castle->Process(mousePos);
+        villagerOne->Process(mousePos);
+        villagerTwo->Process(mousePos);
 
         EndDrawing();
     }
