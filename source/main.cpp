@@ -26,7 +26,6 @@ int main() {
     villagers[0]->SetCurrentPosition(100, 100);
     villagers[1]->SetCurrentPosition(200, 300);
 
-    String curr = "Label is empty";
     while (!WindowShouldClose()) {
         const Vector2 mousePos      = GetMousePosition();
         const bool    bMouseClicked = IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
