@@ -9,6 +9,8 @@ set(LIBRARY_SOURCE
     buildings/CastleParser.cpp
 
     # Unit parsers added here:
+    units/VillagerParser.h
+    units/VillagerParser.cpp
 )
 
 add_library(${LIBRARY_NAME} "${LIBRARY_SOURCE}")
