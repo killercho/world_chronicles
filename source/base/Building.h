@@ -8,7 +8,7 @@
 // All of the buildings in the game will inherit from this class
 class Building {
  protected:
-    // Health that the unit has currently
+    // Health that the building has currently.
     int m_health{ 0 };
 
     // Holds the texture of the building.
