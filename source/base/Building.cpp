@@ -52,3 +52,11 @@ bool Building::IsPlaced() const noexcept {
 Rectangle Building::GetRectangle() const noexcept {
     return m_rect;
 }
+
+void Building::SetSelected(const bool bSelected) {
+    m_bSelected = bSelected;
+}
+
+bool Building::IsSelected() const noexcept {
+    return m_bSelected;
+}

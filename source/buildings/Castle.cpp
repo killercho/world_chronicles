@@ -11,12 +11,19 @@ Castle::Castle() : m_castleParser(CONSTANTS_PATH "buildings/Castle.ini") {
                 m_castleParser.GetSpriteHeight());
 }
 
-void Castle::Draw(const Vector2& mousePosition) {
+void Castle::Draw() {
     if (!IsPlaced()) {
         DrawTexture(m_buildingTexture, m_rect.x, m_rect.y, GREEN);
     } else {
         DrawTexture(m_buildingTexture, m_rect.x, m_rect.y, WHITE);
     }
+}
 
-    DrawOutline(mousePosition);
+void Castle::Process(const Vector2& mousePosition) {
+    const bool bMouseOverCastle = CheckCollisionPointRec(mousePosition, m_rect);
+    Draw();
+    if (bMouseOverCastle) {
+        DrawHoveredOutline();
+    }
+    DrawSelectedOutline();
 }

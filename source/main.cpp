@@ -20,19 +20,27 @@ int main() {
 
     String curr = "Label is empty";
     while (!WindowShouldClose()) {
-        const Vector2 mousePos = GetMousePosition();
-        if (!castleTest->IsPlaced() &&
-            IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+        const Vector2 mousePos      = GetMousePosition();
+        const bool    bMouseClicked = IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
+
+        if (!castleTest->IsPlaced() && bMouseClicked) {
             castleTest->SetPositionFromMouse(mousePos);
             castleTest->SetPlaced(true);
         } else if (!castleTest->IsPlaced()) {
             castleTest->SetPositionFromMouse(mousePos);
         }
 
+        if (bMouseClicked &&
+            CheckCollisionPointRec(mousePos, castleTest->GetRectangle())) {
+            castleTest->SetSelected(true);
+        } else if (bMouseClicked) {
+            castleTest->SetSelected(false);
+        }
+
         BeginDrawing();
         ClearBackground(RAYWHITE);
 
-        castleTest->Draw(mousePos);
+        castleTest->Process(mousePos);
 
         EndDrawing();
     }

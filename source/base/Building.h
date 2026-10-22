@@ -23,30 +23,41 @@ class Building {
     // Whether the building was placed or not.
     bool m_bPlaced{ false };
 
+    // Whether the current building is selected by the mouse.
+    bool m_bSelected{ false };
+
     // Loads a texture from the path of a png.
     // Uses the size given to resize the image to be the correct size.
     void LoadTexture(const String&      filename,
                      const unsigned int sizeWidth,
                      const unsigned int sizeHeight);
 
-    // Places an outline on the building when the mouse position is over the texture.,
+    // Places an outline on the building when the mouse position is over the texture.
     // The template is used for easy removal of the outline with debug purposes.
-    template<bool bDraw = true>
-    void DrawOutline(const Vector2& mousePosition) const {
+    template<bool bDraw = true> void DrawHoveredOutline() const {
         if constexpr (!bDraw) {
             // Do not draw if the flag is not enabled.
             return;
         }
-        if (!IsPlaced()) {
-            // Do not try to draw an outline if the building was not even placed.
-            return;
-        }
-        const bool bMouseOverCastle =
-            CheckCollisionPointRec(mousePosition, m_rect);
-        if (bMouseOverCastle) {
+        if (IsPlaced()) {
             DrawRectangleLinesEx(m_rect, 1.0f, GREEN);
         }
     }
+
+    // Places an outline on the building when it is in a selected state.
+    // The template is used for easy removal of the outline with debug purposes.
+    template<bool bDraw = true> void DrawSelectedOutline() const {
+        if constexpr (!bDraw) {
+            // Do not draw if the flag is not enabled.
+            return;
+        }
+        if (IsSelected()) {
+            DrawRectangleLinesEx(m_rect, 1.0f, RED);
+        }
+    }
+
+    // Draws the building taking into account its current state.
+    virtual void Draw() = 0;
 
  public:
     Building() = default;
@@ -56,9 +67,12 @@ class Building {
     Building& operator=(const Building&) = default;
     Building& operator=(Building&&)      = default;
 
-    // Draws the building taking into account its current state.
-    // Takes the mouse position so that calculations can be made inside the class.
-    virtual void Draw(const Vector2& mousePosition) = 0;
+    // Processes the building for this game loop.
+    // Takes the mouse position to avoid having to call the raylib getter
+    // at all the buildings.
+    // All of the process calls need to be done inside of the BeginDraw()-EndDraw() chain
+    // because the processes are what is drawing the buildings.
+    virtual void Process(const Vector2& mousePosition) = 0;
 
     // Returns the health of the building.
     int GetHealth() const noexcept;
@@ -72,9 +86,13 @@ class Building {
 
     // Set whether the building was placed.
     void SetPlaced(const bool bPlaced);
-
     // Returns true if the building was placed.
     bool IsPlaced() const noexcept;
+
+    // Set whether the building was selected.
+    void SetSelected(const bool bSelected);
+    // Returns true if the building was selected with the mouse.
+    bool IsSelected() const noexcept;
 
     // Returns the rectangle that was calculated for the position and texture given.
     Rectangle GetRectangle() const noexcept;

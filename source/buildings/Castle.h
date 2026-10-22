@@ -10,11 +10,13 @@ class Castle : public Building {
     // Holds all the constants that the castle will use during its lifetime.
     CastleParser m_castleParser;
 
+    void Draw() override;
+
  public:
     Castle();
     ~Castle() override = default;
 
-    void Draw(const Vector2& mousePosition) override;
+    void Process(const Vector2& mousePosition) override;
 };
 
 #endif  // SOURCE_BUILDINGS_CASTLE_H_
