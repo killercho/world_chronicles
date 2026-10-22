@@ -32,6 +32,7 @@ bool Game::ShouldExit() const {
 void Game::Process() {
     const Vector2 mousePos      = GetMousePosition();
     const bool    bMouseClicked = IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
+    DrawMouseRectangle();
 
     if (!m_castle->IsPlaced() && bMouseClicked) {
         m_castle->SetPositionFromMouse(mousePos);
@@ -51,4 +52,29 @@ void Game::Process() {
                   });
 
     EndDrawing();
+}
+
+void Game::DrawMouseRectangle() {
+    const Vector2 mousePos      = GetMousePosition();
+    const bool    bMouseClicked = IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
+    if (bMouseClicked) {
+        m_mouseRect.x      = mousePos.x;
+        m_mouseRect.y      = mousePos.y;
+        m_mouseRect.height = 1;
+        m_mouseRect.width  = 1;
+    } else if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)) {
+        if (m_mouseRect.x >= mousePos.x) {
+            m_mouseRect.width += m_mouseRect.x - mousePos.x;
+            m_mouseRect.x      = mousePos.x;
+        } else {
+            m_mouseRect.width = mousePos.x - m_mouseRect.x;
+        }
+        if (m_mouseRect.y >= mousePos.y) {
+            m_mouseRect.height += m_mouseRect.y - mousePos.y;
+            m_mouseRect.y       = mousePos.y;
+        } else {
+            m_mouseRect.height = mousePos.y - m_mouseRect.y;
+        }
+        DrawRectangleLinesEx(m_mouseRect, 1.0f, GREEN);
+    }
 }

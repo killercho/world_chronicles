@@ -4,6 +4,7 @@
 #include <units/Villager.h>
 #include <buildings/Castle.h>
 #include <parsers/GeneralParser.h>
+#include <raylib.h>
 #include <memory>
 
 // Holds the whole game loop.
@@ -17,6 +18,12 @@ class Game {
     // Test subjects that are used only as harcoded values to test interactions:
     std::vector<std::shared_ptr<Villager>> m_villagers;
     std::shared_ptr<Castle>                m_castle;
+
+    // The rect that mouse dragging creates.
+    Rectangle m_mouseRect;
+    
+    // Draws the mouse rect that is used for selection.
+    void DrawMouseRectangle();
 
  public:
     Game();
