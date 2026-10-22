@@ -18,11 +18,13 @@ int main() {
     SetWindowState(FLAG_WINDOW_RESIZABLE);
 
     std::shared_ptr<Castle> castle = std::make_shared<Castle>();
-    std::shared_ptr<Villager> villagerOne = std::make_shared<Villager>();
-    std::shared_ptr<Villager> villagerTwo = std::make_shared<Villager>();
 
-    villagerOne->SetCurrentPosition(100, 100);
-    villagerTwo->SetCurrentPosition(200, 300);
+    std::vector<std::shared_ptr<Villager>> villagers;
+    villagers.emplace_back(std::make_shared<Villager>());
+    villagers.emplace_back(std::make_shared<Villager>());
+
+    villagers[0]->SetCurrentPosition(100, 100);
+    villagers[1]->SetCurrentPosition(200, 300);
 
     String curr = "Label is empty";
     while (!WindowShouldClose()) {
@@ -43,12 +45,29 @@ int main() {
             castle->SetSelected(false);
         }
 
+        if (bMouseClicked &&
+            CheckCollisionPointRec(mousePos, villagers[0]->GetRectangle())) {
+            villagers[0]->SetSelected(true);
+        } else if (bMouseClicked) {
+            villagers[0]->SetSelected(false);
+        }
+
+        if (bMouseClicked &&
+            CheckCollisionPointRec(mousePos, villagers[1]->GetRectangle())) {
+            villagers[1]->SetSelected(true);
+        } else if (bMouseClicked) {
+            villagers[1]->SetSelected(false);
+        }
+
         BeginDrawing();
         ClearBackground(RAYWHITE);
 
         castle->Process(mousePos);
-        villagerOne->Process(mousePos);
-        villagerTwo->Process(mousePos);
+        std::for_each(villagers.begin(),
+                      villagers.end(),
+                      [&mousePos](const std::shared_ptr<Villager>& villager) {
+                          villager->Process(mousePos);
+                      });
 
         EndDrawing();
     }
