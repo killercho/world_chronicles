@@ -15,8 +15,8 @@ void Building::LoadTexture(const String&      filename,
 
     UnloadImage(newImage);
 
-    m_rect.x      = m_positionX;
-    m_rect.y      = m_positionY;
+    m_rect.x      = 0;
+    m_rect.y      = 0;
     m_rect.width  = m_buildingTexture.width;
     m_rect.height = m_buildingTexture.height;
 }
@@ -26,20 +26,14 @@ int Building::GetHealth() const noexcept {
 }
 
 void Building::SetCurrentPosition(const Vector2 newPos) {
-    m_positionX = newPos.x;
-    m_positionY = newPos.y;
-
-    m_rect.x = m_positionX;
-    m_rect.y = m_positionY;
+    m_rect.x = newPos.x;
+    m_rect.y = newPos.y;
 }
 
 void Building::SetCurrentPosition(const unsigned int newX,
                                   const unsigned int newY) {
-    m_positionX = newX;
-    m_positionY = newY;
-
-    m_rect.x = m_positionX;
-    m_rect.y = m_positionY;
+    m_rect.x = newX;
+    m_rect.y = newY;
 }
 
 void Building::SetPlaced(const bool bPlaced) {

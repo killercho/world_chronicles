@@ -11,10 +11,6 @@ class Building {
     // Health that the unit has currently
     int m_health{ 0 };
 
-    // The coordinates of the building on the window.
-    unsigned int m_positionX{ 0 };
-    unsigned int m_positionY{ 0 };
-
     // Holds the texture of the building.
     // This would need to be replaced with something more when animations
     // and different states of the building are introduced.
