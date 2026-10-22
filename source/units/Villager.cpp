@@ -11,18 +11,15 @@ void Villager::Draw() {
     DrawTexture(m_texture, m_rect.x, m_rect.y, WHITE);
 }
 
-void Villager::Process(const Vector2& mousePosition) {
-    const bool bMouseOver = CheckCollisionPointRec(mousePosition, m_rect);
-    const bool bMouseClicked = IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
-    if (bMouseOver && bMouseClicked) {
-        SetSelected(true);
-    } else if (bMouseClicked) {
-        SetSelected(false);
+void Villager::Process(const bool bMouseReleased, const Rectangle& mouseRect) {
+    if (bMouseReleased) {
+        if (CheckCollisionRecs(m_rect, mouseRect)) {
+            SetSelected(true);
+        } else {
+            SetSelected(false);
+        }
     }
 
     Draw();
-    if (bMouseOver) {
-        DrawHoveredOutline();
-    }
     DrawSelectedOutline();
 }

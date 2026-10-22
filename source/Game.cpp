@@ -30,8 +30,9 @@ bool Game::ShouldExit() const {
 }
 
 void Game::Process() {
-    const Vector2 mousePos      = GetMousePosition();
-    const bool    bMouseClicked = IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
+    const Vector2 mousePos       = GetMousePosition();
+    const bool    bMouseClicked  = IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
+    const bool    bMouseReleased = IsMouseButtonReleased(MOUSE_BUTTON_LEFT);
     DrawMouseRectangle();
 
     if (!m_castle->IsPlaced() && bMouseClicked) {
@@ -45,11 +46,12 @@ void Game::Process() {
     ClearBackground(RAYWHITE);
 
     m_castle->Process(mousePos);
-    std::for_each(m_villagers.begin(),
-                  m_villagers.end(),
-                  [&mousePos](const std::shared_ptr<Villager>& villager) {
-                      villager->Process(mousePos);
-                  });
+    std::for_each(
+        m_villagers.begin(),
+        m_villagers.end(),
+        [bMouseReleased, this](const std::shared_ptr<Villager>& villager) {
+            villager->Process(bMouseReleased, m_mouseRect);
+        });
 
     EndDrawing();
 }

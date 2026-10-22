@@ -28,16 +28,6 @@ class Unit {
                      const unsigned int sizeWidth,
                      const unsigned int sizeHeight);
 
-    // Places an outline on the unit when the mouse position is over the texture.
-    // The template is used for easy removal of the outline with debug purposes.
-    template<bool bDraw = true> void DrawHoveredOutline() const {
-        if constexpr (!bDraw) {
-            // Do not draw if the flag is not enabled.
-            return;
-        }
-        DrawRectangleLinesEx(m_rect, 1.0f, GREEN);
-    }
-
     // Places an outline on the unit when it is in a selected state.
     // The template is used for easy removal of the outline with debug purposes.
     template<bool bDraw = true> void DrawSelectedOutline() const {
@@ -63,10 +53,11 @@ class Unit {
 
     // Processes the unit for this game loop.
     // Takes the mouse position to avoid having to call the raylib getter
-    // at all the units.
+    // at all the units and whether the mouse click was released.
     // All of the process calls need to be done inside of the BeginDraw()-EndDraw() chain
     // because the processes are what is drawing the units.
-    virtual void Process(const Vector2& mousePosition) = 0;
+    virtual void Process(const bool       bMouseReleased,
+                         const Rectangle& mouseRect) = 0;
 
     // Returns the health of the unit.
     int GetHealth() const noexcept;

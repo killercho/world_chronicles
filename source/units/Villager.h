@@ -16,7 +16,8 @@ class Villager : public Unit {
     Villager();
     ~Villager() override = default;
 
-    void Process(const Vector2& mousePosition) override;
+    void Process(const bool       bMouseReleased,
+                 const Rectangle& mouseRect) override;
 };
 
 #endif  // SOURCE_UNITS_VILLAGER_H_
