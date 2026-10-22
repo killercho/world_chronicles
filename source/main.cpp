@@ -38,20 +38,6 @@ int main() {
             castle->SetPositionFromMouse(mousePos);
         }
 
-        if (bMouseClicked &&
-            CheckCollisionPointRec(mousePos, villagers[0]->GetRectangle())) {
-            villagers[0]->SetSelected(true);
-        } else if (bMouseClicked) {
-            villagers[0]->SetSelected(false);
-        }
-
-        if (bMouseClicked &&
-            CheckCollisionPointRec(mousePos, villagers[1]->GetRectangle())) {
-            villagers[1]->SetSelected(true);
-        } else if (bMouseClicked) {
-            villagers[1]->SetSelected(false);
-        }
-
         BeginDrawing();
         ClearBackground(RAYWHITE);
 

@@ -13,6 +13,13 @@ void Villager::Draw() {
 
 void Villager::Process(const Vector2& mousePosition) {
     const bool bMouseOver = CheckCollisionPointRec(mousePosition, m_rect);
+    const bool bMouseClicked = IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
+    if (bMouseOver && bMouseClicked) {
+        SetSelected(true);
+    } else if (bMouseClicked) {
+        SetSelected(false);
+    }
+
     Draw();
     if (bMouseOver) {
         DrawHoveredOutline();
