@@ -39,13 +39,6 @@ int main() {
         }
 
         if (bMouseClicked &&
-            CheckCollisionPointRec(mousePos, castle->GetRectangle())) {
-            castle->SetSelected(true);
-        } else if (bMouseClicked) {
-            castle->SetSelected(false);
-        }
-
-        if (bMouseClicked &&
             CheckCollisionPointRec(mousePos, villagers[0]->GetRectangle())) {
             villagers[0]->SetSelected(true);
         } else if (bMouseClicked) {
