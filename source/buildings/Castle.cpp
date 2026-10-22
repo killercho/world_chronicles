@@ -1,14 +1,10 @@
 #include "Castle.h"
 #include <raylib.h>
 
-Castle::Castle() : m_castleParser(CONSTANTS_PATH "buildings/Castle.ini") {
-    TraceLog(LOG_TRACE,
-             "Castle loaded with health: %d",
-             m_castleParser.GetMaxHealth());
-
+Castle::Castle() : m_parser(CONSTANTS_PATH "buildings/Castle.ini") {
     LoadTexture(ASSETS_PATH "buildings/castle.png",
-                m_castleParser.GetSpriteWidth(),
-                m_castleParser.GetSpriteHeight());
+                m_parser.GetSpriteWidth(),
+                m_parser.GetSpriteHeight());
 }
 
 void Castle::Draw() {
@@ -20,9 +16,9 @@ void Castle::Draw() {
 }
 
 void Castle::Process(const Vector2& mousePosition) {
-    const bool bMouseOverCastle = CheckCollisionPointRec(mousePosition, m_rect);
+    const bool bMouseOver = CheckCollisionPointRec(mousePosition, m_rect);
     Draw();
-    if (bMouseOverCastle) {
+    if (bMouseOver) {
         DrawHoveredOutline();
     }
     DrawSelectedOutline();

@@ -8,7 +8,7 @@
 class Castle : public Building {
  private:
     // Holds all the constants that the castle will use during its lifetime.
-    CastleParser m_castleParser;
+    CastleParser m_parser;
 
     void Draw() override;
 
