@@ -46,6 +46,9 @@ class Building {
     // Setters for the position that the building is on.
     void SetCurrentPosition(const Vector2 newPos);
     void SetCurrentPosition(const unsigned int newX, const unsigned int newY);
+    // Sets the current position from the mouse position.
+    // Includes an offset from the mouse pointer to the middle of the texture.
+    void SetPositionFromMouse(const Vector2 newPos);
 
     // Set whether the building was placed.
     void SetPlaced(const bool bPlaced);

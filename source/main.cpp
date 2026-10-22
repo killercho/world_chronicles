@@ -25,10 +25,10 @@ int main() {
         const Vector2 mousePos = GetMousePosition();
         if (!castleTest->IsPlaced() &&
             IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
-            castleTest->SetCurrentPosition(mousePos);
+            castleTest->SetPositionFromMouse(mousePos);
             castleTest->SetPlaced(true);
         } else if (!castleTest->IsPlaced()) {
-            castleTest->SetCurrentPosition(mousePos);
+            castleTest->SetPositionFromMouse(mousePos);
         }
 
         const bool bMouseOverCastle =
