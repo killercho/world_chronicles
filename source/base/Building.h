@@ -29,6 +29,25 @@ class Building {
                      const unsigned int sizeWidth,
                      const unsigned int sizeHeight);
 
+    // Places an outline on the building when the mouse position is over the texture.,
+    // The template is used for easy removal of the outline with debug purposes.
+    template<bool bDraw = true>
+    void DrawOutline(const Vector2& mousePosition) const {
+        if constexpr (!bDraw) {
+            // Do not draw if the flag is not enabled.
+            return;
+        }
+        if (!IsPlaced()) {
+            // Do not try to draw an outline if the building was not even placed.
+            return;
+        }
+        const bool bMouseOverCastle =
+            CheckCollisionPointRec(mousePosition, m_rect);
+        if (bMouseOverCastle) {
+            DrawRectangleLinesEx(m_rect, 1.0f, GREEN);
+        }
+    }
+
  public:
     Building() = default;
     virtual ~Building();
@@ -38,17 +57,18 @@ class Building {
     Building& operator=(Building&&)      = default;
 
     // Draws the building taking into account its current state.
-    virtual void Draw() = 0;
+    // Takes the mouse position so that calculations can be made inside the class.
+    virtual void Draw(const Vector2& mousePosition) = 0;
 
     // Returns the health of the building.
     int GetHealth() const noexcept;
 
     // Setters for the position that the building is on.
-    void SetCurrentPosition(const Vector2 newPos);
+    void SetCurrentPosition(const Vector2& newPos);
     void SetCurrentPosition(const unsigned int newX, const unsigned int newY);
     // Sets the current position from the mouse position.
     // Includes an offset from the mouse pointer to the middle of the texture.
-    void SetPositionFromMouse(const Vector2 newPos);
+    void SetPositionFromMouse(const Vector2& newPos);
 
     // Set whether the building was placed.
     void SetPlaced(const bool bPlaced);

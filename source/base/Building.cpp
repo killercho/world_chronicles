@@ -25,7 +25,7 @@ int Building::GetHealth() const noexcept {
     return m_health;
 }
 
-void Building::SetCurrentPosition(const Vector2 newPos) {
+void Building::SetCurrentPosition(const Vector2& newPos) {
     m_rect.x = newPos.x;
     m_rect.y = newPos.y;
 }
@@ -36,7 +36,7 @@ void Building::SetCurrentPosition(const unsigned int newX,
     m_rect.y = newY;
 }
 
-void Building::SetPositionFromMouse(const Vector2 newPos) {
+void Building::SetPositionFromMouse(const Vector2& newPos) {
     m_rect.x = newPos.x - m_rect.width / 2.0f;
     m_rect.y = newPos.y - m_rect.height / 2.0f;
 }

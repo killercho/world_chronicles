@@ -4,8 +4,6 @@
 #include <raygui/raygui.h>
 #include <raylib.h>
 
-#include <iostream>
-
 int main() {
     GeneralParser windowSettings(CONSTANTS_PATH "GeneralSettings.ini");
     if (!windowSettings.GetLatestError().Empty()) {
@@ -31,20 +29,10 @@ int main() {
             castleTest->SetPositionFromMouse(mousePos);
         }
 
-        const bool bMouseOverCastle =
-            CheckCollisionPointRec(mousePos, castleTest->GetRectangle());
-        if (bMouseOverCastle && IsMouseButtonPressed(MOUSE_BUTTON_LEFT) &&
-            castleTest->IsPlaced()) {
-            std::cout << String("Castle clicked!\n");
-        }
-        if (bMouseOverCastle && castleTest->IsPlaced()) {
-            DrawRectangleLinesEx(castleTest->GetRectangle(), 1.0f, GREEN);
-        }
-
         BeginDrawing();
         ClearBackground(RAYWHITE);
 
-        castleTest->Draw();
+        castleTest->Draw(mousePos);
 
         EndDrawing();
     }

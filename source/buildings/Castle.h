@@ -14,7 +14,7 @@ class Castle : public Building {
     Castle();
     ~Castle() override = default;
 
-    void Draw() override;
+    void Draw(const Vector2& mousePosition) override;
 };
 
 #endif  // SOURCE_BUILDINGS_CASTLE_H_
