@@ -47,3 +47,23 @@ void Unit::SetSelected(const bool bSelected) {
 bool Unit::IsSelected() const noexcept {
     return m_bSelected;
 }
+
+void Unit::MoveToward(const Vector2& location) {
+    m_bMoving         = true;
+    m_targetMovePoint = location;
+}
+
+void Unit::Move(const unsigned int moveSpeed) {
+    if (!m_bMoving) {
+        // The unit is not supposed to be moving.
+        return;
+    }
+    if (std::abs(m_targetMovePoint.x - m_rect.x) < 0.001 &&
+        std::abs(m_targetMovePoint.y - m_rect.y) < 0.001) {
+        // The end condition for the movement to stop.
+        m_bMoving = false;
+        return;
+    }
+
+    const float realSpeed = moveSpeed;
+}

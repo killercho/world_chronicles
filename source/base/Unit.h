@@ -22,6 +22,11 @@ class Unit {
     // Whether the current unit is selected by the mouse.
     bool m_bSelected{ false };
 
+    // Whether the unit is currently moving.
+    bool m_bMoving{ false };
+    // The point towards which the unit should move.
+    Vector2 m_targetMovePoint;
+
     // Loads a texture from the path of a png.
     // Uses the size given to resize the image to be the correct size.
     void LoadTexture(const String&      filename,
@@ -42,6 +47,11 @@ class Unit {
 
     // Draws the unit taking into account its current state.
     virtual void Draw() = 0;
+
+    // Move the unit towards the target point.
+    // Needs to be called in the process before the draws occur.
+    // Takes the move speed of the unit that is defined in the ini file.
+    void Move(const unsigned int moveSpeed);
 
  public:
     Unit() = default;
@@ -73,6 +83,10 @@ class Unit {
 
     // Returns the rectangle that was calculated for the position and texture given.
     Rectangle GetRectangle() const noexcept;
+
+    // Starts the movement of the unit towards the location given.
+    // The actual movement is handled in the process.
+    void MoveToward(const Vector2& location);
 };
 
 #endif  // SOURCE_BASE_UNIT_H_
