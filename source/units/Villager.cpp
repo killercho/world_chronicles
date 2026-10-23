@@ -20,7 +20,7 @@ void Villager::Process(const bool bMouseReleased, const Rectangle& mouseRect) {
         }
     }
 
-    Move();
+    Move(m_parser.GetMoveSpeed());
     Draw();
     DrawSelectedOutline();
 }

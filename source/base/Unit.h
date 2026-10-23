@@ -87,6 +87,11 @@ class Unit {
     // Starts the movement of the unit towards the location given.
     // The actual movement is handled in the process.
     void MoveToward(const Vector2& location);
+    // The same target but applies additional calculations so that the final target is
+    // in the middle of the unit instead of the top left corner.
+    // Specifically made to adjust the mouse target movement.
+    // Copies the point because it will be changed accourding to the rect of the unit.
+    void MoveTowardMouse(Vector2 mousePos);
 };
 
 #endif  // SOURCE_BASE_UNIT_H_

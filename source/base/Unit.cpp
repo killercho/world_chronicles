@@ -53,17 +53,35 @@ void Unit::MoveToward(const Vector2& location) {
     m_targetMovePoint = location;
 }
 
+void Unit::MoveTowardMouse(Vector2 mousePos) {
+    mousePos.x -= m_rect.width / 2.0f;
+    mousePos.y -= m_rect.height / 2.0f;
+    MoveToward(mousePos);
+}
+
 void Unit::Move(const unsigned int moveSpeed) {
     if (!m_bMoving) {
         // The unit is not supposed to be moving.
         return;
     }
-    if (std::abs(m_targetMovePoint.x - m_rect.x) < 0.001 &&
-        std::abs(m_targetMovePoint.y - m_rect.y) < 0.001) {
+    if (std::abs(m_targetMovePoint.x - m_rect.x) < 0.1 &&
+        std::abs(m_targetMovePoint.y - m_rect.y) < 0.1) {
         // The end condition for the movement to stop.
         m_bMoving = false;
         return;
     }
 
-    const float realSpeed = moveSpeed;
+    const float realSpeed = moveSpeed / 10.0f;
+
+    if (m_targetMovePoint.x > m_rect.x) {
+        m_rect.x += realSpeed;
+    } else if (m_targetMovePoint.x < m_rect.x) {
+        m_rect.x -= realSpeed;
+    }
+
+    if (m_targetMovePoint.y > m_rect.y) {
+        m_rect.y += realSpeed;
+    } else if (m_targetMovePoint.y < m_rect.y) {
+        m_rect.y -= realSpeed;
+    }
 }

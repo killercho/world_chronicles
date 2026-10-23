@@ -48,7 +48,7 @@ void Game::Process() {
                       m_villagers.end(),
                       [&mousePos](const std::shared_ptr<Villager>& villager) {
                           if (villager->IsSelected()) {
-                              villager->MoveToward(mousePos);
+                              villager->MoveTowardMouse(mousePos);
                           }
                       });
     }
