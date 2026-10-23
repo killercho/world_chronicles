@@ -15,6 +15,11 @@ class VillagerParser {
     unsigned int m_spriteWidth;
     unsigned int m_spriteHeight;
 
+    // The move speed of the unit.
+    // The speed is converted to an appropriate float before being used.
+    // Taken as an int to avoid any issues with floating points.
+    unsigned int m_moveSpeed;
+
     // Error that was found during the loading.
     String m_latestError;
 
@@ -34,6 +39,7 @@ class VillagerParser {
 
     // Getters for all the constants of the class.
     unsigned int GetMaxHealth() const noexcept;
+    unsigned int GetMoveSpeed() const noexcept;
     unsigned int GetSpriteWidth() const noexcept;
     unsigned int GetSpriteHeight() const noexcept;
 };
