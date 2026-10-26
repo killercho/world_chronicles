@@ -24,10 +24,6 @@ void BuildingFactory::TryPlaceBuilding(const Vector2& mousePos,
         return;
     }
 
-    // This is needed so that the draw call
-    // can happen for the current building to be placed.
-    m_toPlace->Process(mousePos);
-
     if (!m_toPlace->IsPlaced() && bMouseClicked) {
         // The building was actually placed so add it to all the buildings
         // and make sure it cannot be moved again.
@@ -35,9 +31,14 @@ void BuildingFactory::TryPlaceBuilding(const Vector2& mousePos,
         m_toPlace->SetPlaced(true);
         m_allBuildings.emplace_back(m_toPlace);
         m_toPlace.reset();
+        return;
     } else if (!m_toPlace->IsPlaced()) {
         m_toPlace->SetPositionFromMouse(mousePos);
     }
+
+    // This is needed so that the draw call
+    // can happen for the current building to be placed.
+    m_toPlace->Process(mousePos);
 }
 
 void BuildingFactory::CreateNewBuilding() {
