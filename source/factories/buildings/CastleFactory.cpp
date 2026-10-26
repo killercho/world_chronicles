@@ -1,6 +1,6 @@
 #include "CastleFactory.h"
 #include <buildings/Castle.h>
 
-void CastleFactory::MakeBuilding() {
-    m_allBuildings.emplace_back(std::make_shared<Castle>());
+std::shared_ptr<Building> CastleFactory::MakeBuilding() {
+    return std::make_shared<Castle>();
 }

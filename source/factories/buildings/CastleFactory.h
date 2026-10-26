@@ -5,11 +5,12 @@
 
 // Creates and holds all the castle buildings.
 class CastleFactory : public BuildingFactory {
+ protected:
+    // Creates a castle building.
+    std::shared_ptr<Building> MakeBuilding() override;
+
  public:
     ~CastleFactory() override = default;
-
-    // Creates a castle buidling
-    void MakeBuilding() override;
 };
 
 #endif  // SOURCE_FACTORIES_BUILDINGS_BUILDINGFACTORY_H_
