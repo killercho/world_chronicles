@@ -52,6 +52,8 @@ void Game::Process() {
     BeginDrawing();
     ClearBackground(RAYWHITE);
 
+    CreateButtonMappingText();
+
     m_gameObjectManager->ProcessBuildings(mousePos, bLeftMouseClicked);
     m_gameObjectManager->ProcessUnits(m_mouseRect, bLeftMouseReleased);
 
@@ -81,4 +83,11 @@ void Game::DrawMouseRectangle() {
         }
         DrawRectangleLinesEx(m_mouseRect, 1.0f, GREEN);
     }
+}
+
+void Game::CreateButtonMappingText() {
+    GuiLabel(Rectangle(300, 50, 300, 50),
+             "Press 'V' to spawn villagers in the top left courner");
+    GuiLabel(Rectangle(300, 100, 300, 50),
+               "Press 'C' to spawn castles on the mouse cursor");
 }

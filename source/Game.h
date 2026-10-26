@@ -28,6 +28,10 @@ class Game {
     // Draws the mouse rect that is used for selection.
     void DrawMouseRectangle();
 
+    // Creates text that shows what buttons are used for spawning units and buildings.
+    // Used only for debug and will be deleted later.
+    void CreateButtonMappingText();
+
  public:
     Game();
     ~Game();
