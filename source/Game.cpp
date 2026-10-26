@@ -2,7 +2,10 @@
 #include <raygui.h>
 #include <raylib.h>
 
-Game::Game() : m_generalParser(CONSTANTS_PATH "GeneralSettings.ini") { }
+Game::Game()
+    : m_generalParser(CONSTANTS_PATH "GeneralSettings.ini"),
+      m_gameObjectManager(std::make_shared<GameObjectManager>()) { }
+
 Game::~Game() {
     CloseWindow();
 }
