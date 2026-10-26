@@ -4,6 +4,7 @@
 #include <units/Villager.h>
 #include <buildings/Castle.h>
 #include <base/GeneralParser.h>
+#include <factories/buildings/CastleFactory.h>
 #include <raylib.h>
 #include <memory>
 
@@ -17,7 +18,7 @@ class Game {
 
     // Test subjects that are used only as harcoded values to test interactions:
     std::vector<std::shared_ptr<Villager>> m_villagers;
-    std::shared_ptr<Castle>                m_castle;
+    CastleFactory m_castleFactory;
 
     // The rect that mouse dragging creates.
     Rectangle m_mouseRect;

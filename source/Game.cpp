@@ -18,7 +18,8 @@ void Game::InitializeWindow() {
     SetTargetFPS(m_generalParser.GetTargetFps());
     SetWindowState(FLAG_WINDOW_RESIZABLE);
 
-    m_castle    = std::make_shared<Castle>();
+    m_castleFactory.CreateNewBuilding();
+
     m_villagers = { std::make_shared<Villager>(),
                     std::make_shared<Villager>() };
     m_villagers[0]->SetCurrentPosition(100, 100);
@@ -36,13 +37,6 @@ void Game::Process() {
     const bool    bMouseReleased     = IsMouseButtonReleased(MOUSE_BUTTON_LEFT);
     DrawMouseRectangle();
 
-    if (!m_castle->IsPlaced() && bMouseClicked) {
-        m_castle->SetPositionFromMouse(mousePos);
-        m_castle->SetPlaced(true);
-    } else if (!m_castle->IsPlaced()) {
-        m_castle->SetPositionFromMouse(mousePos);
-    }
-
     if (bRightClickClicked) {
         std::for_each(m_villagers.begin(),
                       m_villagers.end(),
@@ -56,7 +50,8 @@ void Game::Process() {
     BeginDrawing();
     ClearBackground(RAYWHITE);
 
-    m_castle->Process(mousePos);
+    m_castleFactory.Process(mousePos, bMouseClicked);
+
     std::for_each(
         m_villagers.begin(),
         m_villagers.end(),

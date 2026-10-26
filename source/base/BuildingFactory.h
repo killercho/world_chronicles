@@ -42,6 +42,7 @@ class BuildingFactory {
     void CreateNewBuilding();
 
     // Ticks the building factory which ticks all the buildings.
+    // The process needs to be called when drawing so that the drawing can happen.
     void Process(const Vector2& mousePos, const bool bMouseClicked);
 };
 
