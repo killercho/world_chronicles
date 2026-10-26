@@ -29,9 +29,13 @@ class UnitFactory {
     // Creates the new unit and adds it to the rest of the units.
     void CreateNewUnit();
 
+    // Starts the movement towards the point given.
+    // The movement starts only if the given boolean is true.
+    void StartMove(const Vector2& mousePos, const bool bRightMouseClicked);
+
     // Ticks the unit factory which ticks all the units.
     // The process needs to be called when drawing so that the drawing can happen.
-    void Process(const Rectangle& mouseRect, const bool bMouseReleased);
+    void Process(const Rectangle& mouseRect, const bool bLeftMouseReleased);
 };
 
 #endif  // SOURCE_BASE_UNITFACTORY_H_

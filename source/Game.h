@@ -3,9 +3,10 @@
 
 #include <base/GeneralParser.h>
 #include <base/ResourceManager.h>
-#include <units/Villager.h>
-#include <buildings/Castle.h>
+
 #include <factories/buildings/CastleFactory.h>
+#include <factories/units/VillagerFactory.h>
+
 #include <raylib.h>
 #include <memory>
 
@@ -21,12 +22,12 @@ class Game {
     std::shared_ptr<ResourceManager> m_resourceManager;
 
     // Test subjects that are used only as harcoded values to test interactions:
-    std::vector<std::shared_ptr<Villager>> m_villagers;
-    CastleFactory m_castleFactory;
+    VillagerFactory m_villagerFactory;
+    CastleFactory   m_castleFactory;
 
     // The rect that mouse dragging creates.
     Rectangle m_mouseRect;
-    
+
     // Draws the mouse rect that is used for selection.
     void DrawMouseRectangle();
 

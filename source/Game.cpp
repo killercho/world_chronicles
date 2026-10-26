@@ -5,7 +5,8 @@
 Game::Game()
     : m_generalParser(CONSTANTS_PATH "GeneralSettings.ini"),
       m_resourceManager(std::make_shared<ResourceManager>()),
-      m_castleFactory(m_resourceManager) { }
+      m_villagerFactory(m_resourceManager), m_castleFactory(m_resourceManager) {
+}
 Game::~Game() {
     CloseWindow();
 }
@@ -22,11 +23,7 @@ void Game::InitializeWindow() {
     SetWindowState(FLAG_WINDOW_RESIZABLE);
 
     m_castleFactory.CreateNewBuilding();
-
-    m_villagers = { std::make_shared<Villager>(m_resourceManager),
-                    std::make_shared<Villager>(m_resourceManager) };
-    m_villagers[0]->SetCurrentPosition(100, 100);
-    m_villagers[1]->SetCurrentPosition(200, 100);
+    m_villagerFactory.CreateNewUnit();
 }
 
 bool Game::ShouldExit() const {
@@ -35,36 +32,25 @@ bool Game::ShouldExit() const {
 
 void Game::Process() {
     const Vector2 mousePos           = GetMousePosition();
-    const bool    bMouseClicked      = IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
-    const bool    bRightClickClicked = IsMouseButtonPressed(MOUSE_BUTTON_RIGHT);
-    const bool    bMouseReleased     = IsMouseButtonReleased(MOUSE_BUTTON_LEFT);
+    const bool    bLeftMouseClicked  = IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
+    const bool    bRightMouseClicked = IsMouseButtonPressed(MOUSE_BUTTON_RIGHT);
+    const bool    bLeftMouseReleased = IsMouseButtonReleased(MOUSE_BUTTON_LEFT);
     DrawMouseRectangle();
 
     if (IsKeyPressed(KEY_C)) {
         m_castleFactory.CreateNewBuilding();
     }
-
-    if (bRightClickClicked) {
-        std::for_each(m_villagers.begin(),
-                      m_villagers.end(),
-                      [&mousePos](const std::shared_ptr<Villager>& villager) {
-                          if (villager->IsSelected()) {
-                              villager->MoveTowardMouse(mousePos);
-                          }
-                      });
+    if (IsKeyPressed(KEY_V)) {
+        m_villagerFactory.CreateNewUnit();
     }
+
+    m_villagerFactory.StartMove(mousePos, bRightMouseClicked);
 
     BeginDrawing();
     ClearBackground(RAYWHITE);
 
-    m_castleFactory.Process(mousePos, bMouseClicked);
-
-    std::for_each(
-        m_villagers.begin(),
-        m_villagers.end(),
-        [bMouseReleased, this](const std::shared_ptr<Villager>& villager) {
-            villager->Process(bMouseReleased, m_mouseRect);
-        });
+    m_castleFactory.Process(mousePos, bLeftMouseClicked);
+    m_villagerFactory.Process(m_mouseRect, bLeftMouseReleased);
 
     EndDrawing();
 }
