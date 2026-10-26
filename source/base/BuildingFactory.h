@@ -39,6 +39,8 @@ class BuildingFactory {
     // Simulates making the building and trying to place it.
     // If the creation and placement were successful
     // adds the new building to the created buildings.
+    // If a building is created when the last one was not placed 
+    // the first one is discarded and that is expected behaviour.
     void CreateNewBuilding();
 
     // Ticks the building factory which ticks all the buildings.

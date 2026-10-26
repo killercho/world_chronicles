@@ -37,6 +37,10 @@ void Game::Process() {
     const bool    bMouseReleased     = IsMouseButtonReleased(MOUSE_BUTTON_LEFT);
     DrawMouseRectangle();
 
+    if (IsKeyPressed(KEY_C)) {
+        m_castleFactory.CreateNewBuilding();
+    }
+
     if (bRightClickClicked) {
         std::for_each(m_villagers.begin(),
                       m_villagers.end(),
