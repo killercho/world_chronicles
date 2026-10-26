@@ -14,6 +14,8 @@ class Villager : public Unit {
 
     void Draw() override;
 
+    void UpdateWalkingBox() override;
+
  public:
     Villager(const std::shared_ptr<ResourceManager>& resourceManager);
     ~Villager() override = default;

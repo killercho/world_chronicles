@@ -20,6 +20,10 @@ class Unit {
     // The rectangle made by the x and y and the texture size.
     Rectangle m_rect;
 
+    // Walking box that should represent the actual wolking hitbox.
+    // Used in the walking algorithm.
+    Rectangle m_walkingBox;
+
     // Whether the current unit is selected by the mouse.
     bool m_bSelected{ false };
 
@@ -39,6 +43,15 @@ class Unit {
             DrawRectangleLinesEx(m_rect, 1.0f, RED);
         }
     }
+    // Places an outline on the walking box.
+    // The template is used for easy removal of the outline with debug purposes.
+    template<bool bDraw = true> void DrawWalkingBoxOutline() const {
+        if constexpr (!bDraw) {
+            // Do not draw if the flag is not enabled.
+            return;
+        }
+        DrawRectangleLinesEx(m_walkingBox, 1.0f, BLUE);
+    }
 
     // Draws the unit taking into account its current state.
     virtual void Draw() = 0;
@@ -48,9 +61,16 @@ class Unit {
     // Takes the move speed of the unit that is defined in the ini file.
     void Move(const unsigned int moveSpeed);
 
+    // Updates the walking hitbox depending on the new m_rect parameters.
+    // Should be called whenever the rect is updated so that the walking
+    // box can keep up with the updates.
+    // Needs to be defined by each of the classes because the walking boxes will be different
+    // for the different units.
+    virtual void UpdateWalkingBox() = 0;
+
  public:
-    Unit() = default;
-    virtual ~Unit() = default;
+    Unit()                       = default;
+    virtual ~Unit()              = default;
     Unit(const Unit&)            = default;
     Unit(Unit&&)                 = default;
     Unit& operator=(const Unit&) = default;
@@ -78,6 +98,8 @@ class Unit {
 
     // Returns the rectangle that was calculated for the position and texture given.
     Rectangle GetRectangle() const noexcept;
+    // Returns the walking hitbox.
+    Rectangle GetWalkingBox() const noexcept;
 
     // Starts the movement of the unit towards the location given.
     // The actual movement is handled in the process.

@@ -12,6 +12,20 @@ VillagerParser::VillagerParser(const String& filename) {
     }
     LoadMainSettings(parser.GetSection("MainSettings"));
     LoadSpriteSettings(parser.GetSection("SpriteSettings"));
+    LoadWalkingBoxSettings(parser.GetSection("WalkingBoxSettings"));
+}
+
+void VillagerParser::LoadWalkingBoxSettings(const SectionParser& section) {
+    if (!section.GetLatestError().Empty()) {
+        return;
+    }
+
+    try {
+        m_walkingBoxWidth  = section.GetValue<unsigned int>("Width");
+        m_walkingBoxHeight = section.GetValue<unsigned int>("Height");
+    } catch (const std::exception& e) {
+        m_latestError = e.what();
+    }
 }
 
 void VillagerParser::LoadSpriteSettings(const SectionParser& section) {
@@ -54,6 +68,14 @@ unsigned int VillagerParser::GetSpriteWidth() const noexcept {
 
 unsigned int VillagerParser::GetSpriteHeight() const noexcept {
     return m_spriteHeight;
+}
+
+unsigned int VillagerParser::GetWalkingBoxWidth() const noexcept {
+    return m_walkingBoxWidth;
+}
+
+unsigned int VillagerParser::GetWalkingBoxHeight() const noexcept {
+    return m_walkingBoxHeight;
 }
 
 const String& VillagerParser::GetLatestError() const noexcept {

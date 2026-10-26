@@ -10,22 +10,26 @@ class VillagerParser {
  private:
     // The absolute maximum health that the castle can have.
     unsigned int m_maxHealth{ 0 };
-
-    // Sprite sizes that will be visualized.
-    unsigned int m_spriteWidth;
-    unsigned int m_spriteHeight;
-
     // The move speed of the unit.
     // The speed is converted to an appropriate float before being used.
     // Taken as an int to avoid any issues with floating points.
-    unsigned int m_moveSpeed;
+    unsigned int m_moveSpeed{ 0 };
+
+    // Sprite sizes that will be visualized.
+    unsigned int m_spriteWidth{ 0 };
+    unsigned int m_spriteHeight{ 0 };
+
+    // Size of the walking hitbox.
+    unsigned int m_walkingBoxWidth{ 0 };
+    unsigned int m_walkingBoxHeight{ 0 };
 
     // Error that was found during the loading.
     String m_latestError;
 
-    // Loads the main settings from the section given.
+    // Loads the settings from the section given.
     void LoadMainSettings(const SectionParser& section);
     void LoadSpriteSettings(const SectionParser& section);
+    void LoadWalkingBoxSettings(const SectionParser& section);
 
  public:
     // Parses the settings from the ini settings file
@@ -42,6 +46,8 @@ class VillagerParser {
     unsigned int GetMoveSpeed() const noexcept;
     unsigned int GetSpriteWidth() const noexcept;
     unsigned int GetSpriteHeight() const noexcept;
+    unsigned int GetWalkingBoxWidth() const noexcept;
+    unsigned int GetWalkingBoxHeight() const noexcept;
 };
 
 #endif  // PARSERS_UNITS_VILLAGERPARSER_H_

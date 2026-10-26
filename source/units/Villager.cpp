@@ -10,6 +10,15 @@ Villager::Villager(const std::shared_ptr<ResourceManager>& resourceManager)
     m_rect.y     = 0;
     m_rect.width = m_texture->width;
     m_rect.height = m_texture->height;
+
+    m_walkingBox.width  = m_parser.GetWalkingBoxWidth();
+    m_walkingBox.height = m_parser.GetWalkingBoxHeight();
+    UpdateWalkingBox();
+}
+
+void Villager::UpdateWalkingBox() {
+    m_walkingBox.x = m_rect.x + (m_rect.width - m_walkingBox.width) / 2.0f;
+    m_walkingBox.y = m_rect.y + m_rect.height - m_walkingBox.height;
 }
 
 void Villager::Draw() {
@@ -28,4 +37,5 @@ void Villager::Process(const bool bMouseReleased, const Rectangle& mouseRect) {
     Move(m_parser.GetMoveSpeed());
     Draw();
     DrawSelectedOutline();
+    DrawWalkingBoxOutline();
 }

@@ -8,12 +8,14 @@ int Unit::GetHealth() const noexcept {
 void Unit::SetCurrentPosition(const Vector2& newPos) {
     m_rect.x = newPos.x;
     m_rect.y = newPos.y;
+    UpdateWalkingBox();
 }
 
 void Unit::SetCurrentPosition(const unsigned int newX,
                               const unsigned int newY) {
     m_rect.x = newX;
     m_rect.y = newY;
+    UpdateWalkingBox();
 }
 
 Rectangle Unit::GetRectangle() const noexcept {
@@ -64,4 +66,5 @@ void Unit::Move(const unsigned int moveSpeed) {
     } else if (m_targetMovePoint.y < m_rect.y) {
         m_rect.y -= realSpeed;
     }
+    UpdateWalkingBox();
 }
