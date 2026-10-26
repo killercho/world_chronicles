@@ -35,7 +35,6 @@ file(GLOB_RECURSE PROJECT_HEADERS CONFIGURE_DEPENDS "${CMAKE_CURRENT_LIST_DIR}/s
 set(PROJECT_INCLUDE 
     "${CMAKE_CURRENT_LIST_DIR}/source" 
     "${CMAKE_CURRENT_LIST_DIR}/libs"
-    "${CMAKE_CURRENT_LIST_DIR}/parsers"
 )
 
 # Declaring executable
@@ -44,8 +43,6 @@ add_executable(${PROJECT_NAME})
 target_sources(${PROJECT_NAME} PRIVATE ${PROJECT_SOURCES})
 target_sources(${PROJECT_NAME} PRIVATE ${PROJECT_HEADERS})
 
-# Speficaly make sure that the parsers can be accessed with the "parsers" prefix when including.
-target_include_directories(${PROJECT_NAME} PRIVATE ".")
 # The other libs can be used directly from their folders.
 target_include_directories(${PROJECT_NAME} PRIVATE "source")
 target_include_directories(${PROJECT_NAME} PRIVATE "libs")
@@ -58,10 +55,6 @@ target_link_libraries(${PROJECT_NAME} PRIVATE raylib)
 add_subdirectory(libs)
 target_link_libraries(${PROJECT_NAME} PRIVATE raygui)
 target_link_libraries(${PROJECT_NAME} PRIVATE string)
-
-# Add the parsers
-add_subdirectory(parsers)
-target_link_libraries(${PROJECT_NAME} PRIVATE parsers)
 
 # Setting release and debug constants and assets
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
