@@ -1,7 +1,7 @@
 #ifndef SOURCE_FACTORIES_BUILDINGS_CASTLEFACTORY_H_
 #define SOURCE_FACTORIES_BUILDINGS_CASTLEFACTORY_H_
 
-#include <factories/buildings/BuildingFactory.h>
+#include <base/BuildingFactory.h>
 
 // Creates and holds all the castle buildings.
 class CastleFactory : public BuildingFactory {

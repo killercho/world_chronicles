@@ -1,5 +1,6 @@
 #include "GeneralParser.h"
 #include <ini_parser/IniParser.h>
+#include <ini_parser/SectionParser.h>
 
 GeneralParser::GeneralParser(const String& filename) {
     IniParser parser(filename);

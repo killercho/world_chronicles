@@ -1,5 +1,5 @@
-#ifndef SOURCE_FACTORIES_BUILDINGS_BUILDINGFACTORY_H_
-#define SOURCE_FACTORIES_BUILDINGS_BUILDINGFACTORY_H_
+#ifndef SOURCE_BASE_BUILDINGFACTORY_H_
+#define SOURCE_BASE_BUILDINGFACTORY_H_
 
 #include <base/Building.h>
 #include <raylib.h>
@@ -26,4 +26,4 @@ class BuildingFactory {
     virtual void MakeBuilding() = 0;
 };
 
-#endif  // SOURCE_FACTORIES_BUILDINGS_BUILDINGFACTORY_H_
+#endif  // SOURCE_BASE_BUILDINGFACTORY_H_

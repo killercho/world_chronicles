@@ -55,6 +55,8 @@ target_link_libraries(${PROJECT_NAME} PRIVATE raylib)
 add_subdirectory(libs)
 target_link_libraries(${PROJECT_NAME} PRIVATE raygui)
 target_link_libraries(${PROJECT_NAME} PRIVATE string)
+target_link_libraries(${PROJECT_NAME} PRIVATE ini_parser)
+target_link_libraries(${PROJECT_NAME} PRIVATE filemanager)
 
 # Setting release and debug constants and assets
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")

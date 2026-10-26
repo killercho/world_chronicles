@@ -1,5 +1,5 @@
-#ifndef PARSERS_GENERALPARSER_H_
-#define PARSERS_GENERALPARSER_H_
+#ifndef BASE_GENERALPARSER_H_
+#define BASE_GENERALPARSER_H_
 
 #include <string/String.h>
 #include <ini_parser/SectionParser.h>
@@ -36,4 +36,4 @@ class GeneralParser {
     const String& GetTitle() const noexcept;
 };
 
-#endif  // PARSERS_GENERALPARSER_H_
+#endif  // BASE_GENERALPARSER_H_
