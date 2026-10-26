@@ -23,8 +23,8 @@ void Game::InitializeWindow() {
 
     m_castleFactory.CreateNewBuilding();
 
-    m_villagers = { std::make_shared<Villager>(),
-                    std::make_shared<Villager>() };
+    m_villagers = { std::make_shared<Villager>(m_resourceManager),
+                    std::make_shared<Villager>(m_resourceManager) };
     m_villagers[0]->SetCurrentPosition(100, 100);
     m_villagers[1]->SetCurrentPosition(200, 100);
 }

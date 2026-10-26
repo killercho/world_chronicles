@@ -2,7 +2,9 @@
 #define SOURCE_UNITS_VILLAGER_H_
 
 #include <base/Unit.h>
+#include <base/ResourceManager.h>
 #include <parsers/units/VillagerParser.h>
+#include <memory>
 
 // Defines the castle building
 class Villager : public Unit {
@@ -13,7 +15,7 @@ class Villager : public Unit {
     void Draw() override;
 
  public:
-    Villager();
+    Villager(const std::shared_ptr<ResourceManager>& resourceManager);
     ~Villager() override = default;
 
     void Process(const bool       bMouseReleased,

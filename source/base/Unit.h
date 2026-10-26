@@ -14,7 +14,8 @@ class Unit {
     // Holds the texture of the unit.
     // This would need to be replaced with something more when animations
     // and different states of the units are introduced.
-    Texture2D m_texture;
+    // Loaded by the resource manager.
+    std::shared_ptr<Texture2D> m_texture;
 
     // The rectangle made by the x and y and the texture size.
     Rectangle m_rect;
@@ -26,12 +27,6 @@ class Unit {
     bool m_bMoving{ false };
     // The point towards which the unit should move.
     Vector2 m_targetMovePoint;
-
-    // Loads a texture from the path of a png.
-    // Uses the size given to resize the image to be the correct size.
-    void LoadTexture(const String&      filename,
-                     const unsigned int sizeWidth,
-                     const unsigned int sizeHeight);
 
     // Places an outline on the unit when it is in a selected state.
     // The template is used for easy removal of the outline with debug purposes.
@@ -55,7 +50,7 @@ class Unit {
 
  public:
     Unit() = default;
-    virtual ~Unit();
+    virtual ~Unit() = default;
     Unit(const Unit&)            = default;
     Unit(Unit&&)                 = default;
     Unit& operator=(const Unit&) = default;

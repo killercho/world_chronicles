@@ -4,6 +4,7 @@
 #include <base/Building.h>
 #include <base/ResourceManager.h>
 #include <parsers/buildings/CastleParser.h>
+#include <memory>
 
 // Defines the castle building
 class Castle : public Building {
