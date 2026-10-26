@@ -1,26 +1,6 @@
 #include "Building.h"
 #include <raylib.h>
 
-Building::~Building() {
-    UnloadTexture(m_texture);
-}
-
-void Building::LoadTexture(const String&      filename,
-                           const unsigned int sizeWidth,
-                           const unsigned int sizeHeight) {
-    Image newImage = LoadImage(filename.c_str());
-    ImageResizeNN(&newImage, sizeWidth, sizeHeight);
-
-    m_texture = LoadTextureFromImage(newImage);
-
-    UnloadImage(newImage);
-
-    m_rect.x      = 0;
-    m_rect.y      = 0;
-    m_rect.width  = m_texture.width;
-    m_rect.height = m_texture.height;
-}
-
 int Building::GetHealth() const noexcept {
     return m_health;
 }

@@ -1,5 +1,10 @@
 #include "BuildingFactory.h"
 
+BuildingFactory::BuildingFactory(
+    const std::shared_ptr<ResourceManager> resourceManager) {
+    m_resourceManager = resourceManager;
+}
+
 BuildingFactory::~BuildingFactory() {
     m_allBuildings.clear();
 }
@@ -19,7 +24,7 @@ void BuildingFactory::TryPlaceBuilding(const Vector2& mousePos,
         return;
     }
 
-    // This is needed so that the draw call 
+    // This is needed so that the draw call
     // can happen for the current building to be placed.
     m_toPlace->Process(mousePos);
 

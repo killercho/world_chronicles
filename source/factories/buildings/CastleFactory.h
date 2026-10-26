@@ -10,6 +10,7 @@ class CastleFactory : public BuildingFactory {
     std::shared_ptr<Building> MakeBuilding() override;
 
  public:
+    CastleFactory(const std::shared_ptr<ResourceManager>& resourceManager);
     ~CastleFactory() override = default;
 };
 

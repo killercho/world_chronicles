@@ -2,6 +2,7 @@
 #define SOURCE_BUILDINGS_CASTLE_H_
 
 #include <base/Building.h>
+#include <base/ResourceManager.h>
 #include <parsers/buildings/CastleParser.h>
 
 // Defines the castle building
@@ -13,7 +14,7 @@ class Castle : public Building {
     void Draw() override;
 
  public:
-    Castle();
+    Castle(const std::shared_ptr<ResourceManager>& resourceManager);
     ~Castle() override = default;
 
     void Process(const Vector2& mousePosition) override;

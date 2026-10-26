@@ -2,6 +2,7 @@
 #define SOURCE_BASE_BUILDINGFACTORY_H_
 
 #include <base/Building.h>
+#include <base/ResourceManager.h>
 #include <raylib.h>
 #include <memory>
 #include <vector>
@@ -25,10 +26,14 @@ class BuildingFactory {
     void TryPlaceBuilding(const Vector2& mousePos, const bool bMouseClicked);
 
  protected:
+    // Resource manager from the parent class that is used for getting the textures.
+    std::shared_ptr<ResourceManager> m_resourceManager;
+
     // Creates a specific building that will be tried to be placed.
     virtual std::shared_ptr<Building> MakeBuilding() = 0;
 
  public:
+    BuildingFactory(const std::shared_ptr<ResourceManager> resourceManager);
     virtual ~BuildingFactory();
 
     // Returns the rectangles that describe the buildings
@@ -39,7 +44,7 @@ class BuildingFactory {
     // Simulates making the building and trying to place it.
     // If the creation and placement were successful
     // adds the new building to the created buildings.
-    // If a building is created when the last one was not placed 
+    // If a building is created when the last one was not placed
     // the first one is discarded and that is expected behaviour.
     void CreateNewBuilding();
 

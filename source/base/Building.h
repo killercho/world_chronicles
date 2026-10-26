@@ -14,7 +14,8 @@ class Building {
     // Holds the texture of the building.
     // This would need to be replaced with something more when animations
     // and different states of the building are introduced.
-    Texture2D m_texture;
+    // Loaded by the resource manager.
+    std::shared_ptr<Texture2D> m_texture;
 
     // The rectangle made by the x and y and the texture size.
     Rectangle m_rect;
@@ -24,12 +25,6 @@ class Building {
 
     // Whether the current building is selected by the mouse.
     bool m_bSelected{ false };
-
-    // Loads a texture from the path of a png.
-    // Uses the size given to resize the image to be the correct size.
-    void LoadTexture(const String&      filename,
-                     const unsigned int sizeWidth,
-                     const unsigned int sizeHeight);
 
     // Places an outline on the building when the mouse position is over the texture.
     // The template is used for easy removal of the outline with debug purposes.
@@ -60,7 +55,7 @@ class Building {
 
  public:
     Building() = default;
-    virtual ~Building();
+    virtual ~Building() = default;
     Building(const Building&)            = default;
     Building(Building&&)                 = default;
     Building& operator=(const Building&) = default;
