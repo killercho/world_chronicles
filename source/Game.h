@@ -2,7 +2,7 @@
 #define SOURCE_GAME_H_
 
 #include <base/GeneralParser.h>
-#include <base/ResourceManager.h>
+#include <base/GameObjectManager.h>
 
 #include <factories/buildings/CastleFactory.h>
 #include <factories/units/VillagerFactory.h>
@@ -18,12 +18,9 @@ class Game {
     // Parser for the settings used to initialize the window.
     GeneralParser m_generalParser;
 
-    // Resource manager holding all the textures of the game.
-    std::shared_ptr<ResourceManager> m_resourceManager;
-
-    // Test subjects that are used only as harcoded values to test interactions:
-    VillagerFactory m_villagerFactory;
-    CastleFactory   m_castleFactory;
+    // Holds all the game objects that the player controls.
+    // Its position in the hierarchy could change during development.
+    std::shared_ptr<GameObjectManager> m_gameObjectManager;
 
     // The rect that mouse dragging creates.
     Rectangle m_mouseRect;

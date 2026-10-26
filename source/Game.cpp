@@ -2,11 +2,7 @@
 #include <raygui.h>
 #include <raylib.h>
 
-Game::Game()
-    : m_generalParser(CONSTANTS_PATH "GeneralSettings.ini"),
-      m_resourceManager(std::make_shared<ResourceManager>()),
-      m_villagerFactory(m_resourceManager), m_castleFactory(m_resourceManager) {
-}
+Game::Game() : m_generalParser(CONSTANTS_PATH "GeneralSettings.ini") { }
 Game::~Game() {
     CloseWindow();
 }
@@ -22,8 +18,8 @@ void Game::InitializeWindow() {
     SetTargetFPS(m_generalParser.GetTargetFps());
     SetWindowState(FLAG_WINDOW_RESIZABLE);
 
-    m_castleFactory.CreateNewBuilding();
-    m_villagerFactory.CreateNewUnit();
+    m_gameObjectManager->AddBuildingFactory<CastleFactory>();
+    m_gameObjectManager->AddUnitFactory<VillagerFactory>();
 }
 
 bool Game::ShouldExit() const {
@@ -38,19 +34,23 @@ void Game::Process() {
     DrawMouseRectangle();
 
     if (IsKeyPressed(KEY_C)) {
-        m_castleFactory.CreateNewBuilding();
+        const auto factory =
+            m_gameObjectManager->GetBuildingFactory<CastleFactory>();
+        factory->CreateNewBuilding();
     }
     if (IsKeyPressed(KEY_V)) {
-        m_villagerFactory.CreateNewUnit();
+        const auto factory =
+            m_gameObjectManager->GetUnitFactory<VillagerFactory>();
+        factory->CreateNewUnit();
     }
 
-    m_villagerFactory.StartMove(mousePos, bRightMouseClicked);
+    m_gameObjectManager->StartUnitsMovement(mousePos, bRightMouseClicked);
 
     BeginDrawing();
     ClearBackground(RAYWHITE);
 
-    m_castleFactory.Process(mousePos, bLeftMouseClicked);
-    m_villagerFactory.Process(m_mouseRect, bLeftMouseReleased);
+    m_gameObjectManager->ProcessBuildings(mousePos, bLeftMouseClicked);
+    m_gameObjectManager->ProcessUnits(m_mouseRect, bLeftMouseReleased);
 
     EndDrawing();
 }
