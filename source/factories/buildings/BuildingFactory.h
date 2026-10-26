@@ -1,5 +1,5 @@
-#ifndef SOURCE_BASE_BUILDINGFACTORY_H_
-#define SOURCE_BASE_BUILDINGFACTORY_H_
+#ifndef SOURCE_FACTORIES_BUILDINGS_BUILDINGFACTORY_H_
+#define SOURCE_FACTORIES_BUILDINGS_BUILDINGFACTORY_H_
 
 #include <base/Building.h>
 #include <raylib.h>
@@ -17,7 +17,7 @@ class BuildingFactory {
  public:
     virtual ~BuildingFactory();
 
-    // Returns the rectangles that describe the buildings 
+    // Returns the rectangles that describe the buildings
     // in this factory.
     // Used in the path algorithm to be able to avoid obstacles.
     std::vector<Rectangle> GetAllRectObstacles() const;
@@ -26,4 +26,4 @@ class BuildingFactory {
     virtual void MakeBuilding() = 0;
 };
 
-#endif  // SOURCE_BASE_BUILDINGFACTORY_H_
+#endif  // SOURCE_FACTORIES_BUILDINGS_BUILDINGFACTORY_H_
