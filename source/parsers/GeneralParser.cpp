@@ -4,7 +4,7 @@
 
 GeneralParser::GeneralParser(const String& filename) {
     IniParser parser(filename);
-    ParseWindowSettings(parser.GetSection("Window_Settings"));
+    ParseWindowSettings(parser.GetSection("WindowSettings"));
 
     if (m_latestError.Empty()) {
         m_latestError = parser.GetLatestError();

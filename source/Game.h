@@ -1,8 +1,8 @@
 #ifndef SOURCE_GAME_H_
 #define SOURCE_GAME_H_
 
-#include <base/GeneralParser.h>
 #include <base/GameObjectManager.h>
+#include <parsers/GeneralParser.h>
 
 #include <factories/buildings/CastleFactory.h>
 #include <factories/units/VillagerFactory.h>
