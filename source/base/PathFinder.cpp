@@ -10,11 +10,6 @@ void PathFinder::Reset() {
 bool PathFinder::IsPointReached(const Vector2& point,
                                 const Vector2& target,
                                 const float    moveSpeed) const {
-    TraceLog(LOG_INFO,
-             "distance manhattan: %f, x distance old: %f, y distance old: %f",
-             GetManhattanDistance(point, target),
-             std::abs(target.x - point.x),
-             std::abs(target.y - point.y));
     return (GetManhattanDistance(point, target) < moveSpeed);
 }
 
