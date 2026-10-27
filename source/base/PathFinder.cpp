@@ -1,6 +1,8 @@
 #include "PathFinder.h"
 #include <raylib.h>
 #include <stdexcept>
+#include <queue>
+#include <list>
 
 void PathFinder::Reset() {
     m_pointIndex = 0;
@@ -13,13 +15,9 @@ bool PathFinder::IsPointReached(const Vector2& point,
     return (GetManhattanDistance(point, target) < moveSpeed);
 }
 
-void PathFinder::Request(Vector2                       currentPosition,
-                         const Vector2&                target,
-                         const float                   moveSpeed,
-                         const std::vector<Rectangle>& allObstacles) {
-    Reset();
-    m_targetPoint = target;
-
+void PathFinder::BuildPathOrdinary(Vector2     currentPosition,
+                                   const float moveSpeed,
+                                   const std::vector<Rectangle>& allObstacles) {
     while (!IsPointReached(currentPosition, m_targetPoint, moveSpeed)) {
         if (m_targetPoint.x > currentPosition.x) {
             currentPosition.x += moveSpeed;
@@ -34,6 +32,41 @@ void PathFinder::Request(Vector2                       currentPosition,
         }
         m_path.emplace_back(currentPosition);
     }
+}
+
+void PathFinder::BuildPath(Vector2                       currentPosition,
+                           const float                   moveSpeed,
+                           const std::vector<Rectangle>& allObstacles) {
+    // Compares the nodes by their position score.
+    const auto gridLocationComparator =
+        [](const std::shared_ptr<internal::GridLocation>& left,
+           const std::shared_ptr<internal::GridLocation>& right) {
+            return left->GetScore() < right->GetScore();
+        };
+
+    // Creates the priority of what is the next node that needs to be explored.
+    std::priority_queue<std::shared_ptr<internal::GridLocation>,
+                        std::list<std::shared_ptr<internal::GridLocation>>,
+                        decltype(gridLocationComparator)>
+        gridLocations(gridLocationComparator);
+
+    // Add the starting point of the algorithm - the current position.
+    gridLocations.push(std::make_shared<internal::GridLocation>(
+        0,
+        GetManhattanDistance(currentPosition, m_targetPoint),
+        currentPosition,
+        nullptr));
+}
+
+void PathFinder::Request(Vector2                       currentPosition,
+                         const Vector2&                target,
+                         const float                   moveSpeed,
+                         const std::vector<Rectangle>& allObstacles) {
+    Reset();
+    m_targetPoint = target;
+
+    // BuildPathOrdinary(currentPosition, moveSpeed, allObstacles);
+    BuildPath(currentPosition, moveSpeed, allObstacles);
 }
 
 const Vector2& PathFinder::GetCurrentPoint() const {

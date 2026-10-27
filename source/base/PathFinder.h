@@ -3,6 +3,39 @@
 
 #include <raylib.h>
 #include <vector>
+#include <memory>
+
+namespace internal {
+// Holds a single location on the grid that is used in the pathfinding algorithm.
+struct GridLocation {
+    // Distance from the grid location to the start of the algorithm.
+    // Updated after each step in any direction using the parent.
+    float distanceToStart{ 0.0f };
+    // Distance from the grid location to the target of the algorithm.
+    // Calculated using the manhattan distance function from the path class.
+    float distanceToTarget{ 0.0f };
+
+    // The actual location of the grid on the map.
+    Vector2 coordinates;
+
+    // The parent that led to the current location.
+    std::shared_ptr<GridLocation> parent;
+
+    // Returns the current grid location score.
+    float GetScore() const noexcept {
+        return distanceToStart + distanceToTarget;
+    }
+
+    GridLocation() = default;
+    GridLocation(const float                          newDistanceToStart,
+                 const float                          newDistanceToTarget,
+                 const Vector2&                       newCoordinates,
+                 const std::shared_ptr<GridLocation>& newParent)
+        : distanceToStart(newDistanceToStart),
+          distanceToTarget(newDistanceToTarget), coordinates(newCoordinates),
+          parent(newParent) { }
+};
+}  // namespace internal
 
 // Contains the logic used for a unit to find a path.
 // Each unit has a single one and the path created is individual.
@@ -16,6 +49,15 @@ class PathFinder {
     unsigned int m_pointIndex;
     // The points that will be used to get to the target.
     std::vector<Vector2> m_path;
+
+    // Executes the pathfinding algorithm (A*) and builds the path that will be used.
+    void BuildPath(Vector2                       currentPosition,
+                   const float                   moveSpeed,
+                   const std::vector<Rectangle>& allObstacles);
+    // Executes the ordinary and normie way to build a path.
+    void BuildPathOrdinary(Vector2                       currentPosition,
+                           const float                   moveSpeed,
+                           const std::vector<Rectangle>& allObstacles);
 
     // Returns the manhattan distance between two points.
     static float GetManhattanDistance(const Vector2& first,
