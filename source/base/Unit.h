@@ -31,6 +31,9 @@ class Unit {
     // Whether the unit is currently moving.
     bool m_bMoving{ false };
 
+    // The movement speed taken from the ini constants.
+    float m_moveSpeed{ 0.0f };
+
     // The algorithm that is used to find a path towards a point.
     std::shared_ptr<PathFinder> m_pathFinder;
 
@@ -61,7 +64,7 @@ class Unit {
     // Move the unit towards the target point.
     // Needs to be called in the process before the draws occur.
     // Takes the move speed of the unit that is defined in the ini file.
-    void Move(const unsigned int moveSpeed);
+    void Move();
 
     // Updates the walking hitbox depending on the new m_rect parameters.
     // Should be called whenever the rect is updated so that the walking

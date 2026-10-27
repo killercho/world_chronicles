@@ -34,7 +34,7 @@ bool Unit::IsSelected() const noexcept {
 
 void Unit::MoveToward(const Vector2& location) {
     m_bMoving = true;
-    m_pathFinder->Request(Vector2(m_rect.x, m_rect.y), location);
+    m_pathFinder->Request(Vector2(m_rect.x, m_rect.y), location, m_moveSpeed);
 }
 
 void Unit::MoveTowardMouse(Vector2 mousePos) {
@@ -43,7 +43,7 @@ void Unit::MoveTowardMouse(Vector2 mousePos) {
     MoveToward(mousePos);
 }
 
-void Unit::Move(const unsigned int moveSpeed) {
+void Unit::Move() {
     if (!m_bMoving) {
         // The unit is not supposed to be moving.
         return;
@@ -55,9 +55,8 @@ void Unit::Move(const unsigned int moveSpeed) {
     }
 
     const Vector2 currentPos = Vector2(m_rect.x, m_rect.y);
-    // TODO: Add a scale factor to the speed of the unit into the ini file as well.
-    float realSpeedX = moveSpeed / 10.0f;
-    float realSpeedY = moveSpeed / 10.0f;
+    float realSpeedX = m_moveSpeed;
+    float realSpeedY = m_moveSpeed;
 
     // Get distance instead and if the distance is 0 move to the next point.
     // Otherwise move with a fraction of the speed required so

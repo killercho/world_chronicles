@@ -13,22 +13,23 @@ bool PathFinder::IsPointReached(const Vector2& point,
             std::abs(target.y - point.y) < 0.1f);
 }
 
-void PathFinder::Request(Vector2 currentPosition, const Vector2& target) {
+void PathFinder::Request(Vector2        currentPosition,
+                         const Vector2& target,
+                         const float    moveSpeed) {
     Reset();
     m_targetPoint = target;
 
-    // TODO: Add the scale factor here.
     while (!IsPointReached(currentPosition, m_targetPoint)) {
         if (m_targetPoint.x > currentPosition.x) {
-            currentPosition.x += 0.5f;
+            currentPosition.x += moveSpeed;
         } else if (m_targetPoint.x < currentPosition.x) {
-            currentPosition.x -= 0.5f;
+            currentPosition.x -= moveSpeed;
         }
 
         if (m_targetPoint.y > currentPosition.y) {
-            currentPosition.y += 0.5f;
+            currentPosition.y += moveSpeed;
         } else if (m_targetPoint.y < currentPosition.y) {
-            currentPosition.y -= 0.5f;
+            currentPosition.y -= moveSpeed;
         }
         m_path.emplace_back(currentPosition);
     }
