@@ -30,8 +30,6 @@ class Unit {
 
     // Whether the unit is currently moving.
     bool m_bMoving{ false };
-    // The point towards which the unit should move.
-    Vector2 m_targetMovePoint;
 
     // The algorithm that is used to find a path towards a point.
     std::shared_ptr<PathFinder> m_pathFinder;
