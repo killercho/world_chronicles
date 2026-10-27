@@ -55,7 +55,7 @@ void Game::Process() {
     CreateButtonMappingText();
 
     m_gameObjectManager->ProcessBuildings(mousePos, bLeftMouseClicked);
-    m_gameObjectManager->ProcessUnits(m_mouseRect, bLeftMouseReleased);
+    m_gameObjectManager->ProcessUnits(m_mouseDraggingRect, bLeftMouseReleased);
 
     EndDrawing();
 }
@@ -64,24 +64,22 @@ void Game::DrawMouseRectangle() {
     const Vector2 mousePos      = GetMousePosition();
     const bool    bMouseClicked = IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
     if (bMouseClicked) {
-        m_mouseRect.x      = mousePos.x;
-        m_mouseRect.y      = mousePos.y;
-        m_mouseRect.height = 1;
-        m_mouseRect.width  = 1;
+        m_mouseStartPos.x = mousePos.x;
+        m_mouseStartPos.y = mousePos.y;
     } else if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)) {
-        if (m_mouseRect.x >= mousePos.x) {
-            m_mouseRect.width += m_mouseRect.x - mousePos.x;
-            m_mouseRect.x      = mousePos.x;
+        if (m_mouseStartPos.x > mousePos.x) {
+            m_mouseDraggingRect.x = mousePos.x;
         } else {
-            m_mouseRect.width = mousePos.x - m_mouseRect.x;
+            m_mouseDraggingRect.x = m_mouseStartPos.x;
         }
-        if (m_mouseRect.y >= mousePos.y) {
-            m_mouseRect.height += m_mouseRect.y - mousePos.y;
-            m_mouseRect.y       = mousePos.y;
+        if (m_mouseStartPos.y > mousePos.y) {
+            m_mouseDraggingRect.y = mousePos.y;
         } else {
-            m_mouseRect.height = mousePos.y - m_mouseRect.y;
+            m_mouseDraggingRect.y = m_mouseStartPos.y;
         }
-        DrawRectangleLinesEx(m_mouseRect, 1.0f, GREEN);
+        m_mouseDraggingRect.width  = std::abs(m_mouseStartPos.x - mousePos.x);
+        m_mouseDraggingRect.height = std::abs(m_mouseStartPos.y - mousePos.y);
+        DrawRectangleLinesEx(m_mouseDraggingRect, 1.0f, GREEN);
     }
 }
 
@@ -89,5 +87,5 @@ void Game::CreateButtonMappingText() {
     GuiLabel(Rectangle(300, 50, 300, 50),
              "Press 'V' to spawn villagers in the top left courner");
     GuiLabel(Rectangle(300, 100, 300, 50),
-               "Press 'C' to spawn castles on the mouse cursor");
+             "Press 'C' to spawn castles on the mouse cursor");
 }

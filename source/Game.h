@@ -22,8 +22,11 @@ class Game {
     // Its position in the hierarchy could change during development.
     std::shared_ptr<GameObjectManager> m_gameObjectManager;
 
-    // The rect that mouse dragging creates.
-    Rectangle m_mouseRect;
+    // The position that mouse dragging starts at.
+    Vector2 m_mouseStartPos;
+    // The rect that is resulting of the mouse dragging.
+    // Saved here for optimization and passing to the units.
+    Rectangle m_mouseDraggingRect;
 
     // Draws the mouse rect that is used for selection.
     void DrawMouseRectangle();
