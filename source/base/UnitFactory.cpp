@@ -19,16 +19,18 @@ void UnitFactory::CreateNewUnit() {
     m_allUnits.emplace_back(newUnit);
 }
 
-void UnitFactory::StartMove(const Vector2& mousePos,
-                            const bool     bRightMouseClicked) {
+void UnitFactory::StartMove(const Vector2&                mousePos,
+                            const bool                    bRightMouseClicked,
+                            const std::vector<Rectangle>& allObstacles) {
     if (bRightMouseClicked) {
-        std::for_each(m_allUnits.begin(),
-                      m_allUnits.end(),
-                      [&mousePos](const std::shared_ptr<Unit>& unit) {
-                          if (unit->IsSelected()) {
-                              unit->MoveTowardMouse(mousePos);
-                          }
-                      });
+        std::for_each(
+            m_allUnits.begin(),
+            m_allUnits.end(),
+            [&mousePos, &allObstacles](const std::shared_ptr<Unit>& unit) {
+                if (unit->IsSelected()) {
+                    unit->MoveTowardMouse(mousePos, allObstacles);
+                }
+            });
     }
 }
 

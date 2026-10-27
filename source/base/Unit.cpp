@@ -32,15 +32,18 @@ bool Unit::IsSelected() const noexcept {
     return m_bSelected;
 }
 
-void Unit::MoveToward(const Vector2& location) {
+void Unit::MoveToward(const Vector2&                location,
+                      const std::vector<Rectangle>& allObstacles) {
     m_bMoving = true;
-    m_pathFinder->Request(Vector2(m_rect.x, m_rect.y), location, m_moveSpeed);
+    m_pathFinder->Request(
+        Vector2(m_rect.x, m_rect.y), location, m_moveSpeed, allObstacles);
 }
 
-void Unit::MoveTowardMouse(Vector2 mousePos) {
+void Unit::MoveTowardMouse(Vector2                       mousePos,
+                           const std::vector<Rectangle>& allObstacles) {
     mousePos.x -= m_rect.width / 2.0f;
     mousePos.y -= m_rect.height / 2.0f;
-    MoveToward(mousePos);
+    MoveToward(mousePos, allObstacles);
 }
 
 void Unit::Move() {

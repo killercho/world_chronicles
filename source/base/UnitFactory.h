@@ -31,7 +31,9 @@ class UnitFactory {
 
     // Starts the movement towards the point given.
     // The movement starts only if the given boolean is true.
-    void StartMove(const Vector2& mousePos, const bool bRightMouseClicked);
+    void StartMove(const Vector2&                mousePos,
+                   const bool                    bRightMouseClicked,
+                   const std::vector<Rectangle>& allObstacles);
 
     // Ticks the unit factory which ticks all the units.
     // The process needs to be called when drawing so that the drawing can happen.

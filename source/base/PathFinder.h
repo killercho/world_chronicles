@@ -29,9 +29,10 @@ class PathFinder {
     // the points that the unit needs to move towards.
     // Takes the move speed to correctly calculate the grid so that the target is reachable
     // and it's as close to the perceived speed.
-    void Request(Vector2        currentPosition,
-                 const Vector2& target,
-                 const float    moveSpeed);
+    void Request(Vector2                       currentPosition,
+                 const Vector2&                target,
+                 const float                   moveSpeed,
+                 const std::vector<Rectangle>& allObstacles);
 
     // Returns the current point that a unit needs to move towards.
     // If there are no more points always returns the last point in the path.

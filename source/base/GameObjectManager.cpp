@@ -23,11 +23,22 @@ std::vector<Rectangle> GameObjectManager::GetAllObstacles() const {
 void GameObjectManager::StartUnitsMovement(const Vector2& mousePos,
                                            const bool     bRightMouseClicked) {
     if (bRightMouseClicked) {
+        std::vector<Rectangle> allObstacles;
+        std::for_each(
+            m_allBuildingFactories.begin(),
+            m_allBuildingFactories.end(),
+            [&allObstacles](const std::shared_ptr<BuildingFactory>& factory) {
+                const auto& currentObstacles = factory->GetAllRectObstacles();
+                allObstacles.insert(allObstacles.end(),
+                                    currentObstacles.begin(),
+                                    currentObstacles.end());
+            });
         std::for_each(m_allUnitFactories.begin(),
                       m_allUnitFactories.end(),
-                      [&mousePos, bRightMouseClicked](
+                      [&mousePos, bRightMouseClicked, &allObstacles](
                           const std::shared_ptr<UnitFactory>& factory) {
-                          factory->StartMove(mousePos, bRightMouseClicked);
+                          factory->StartMove(
+                              mousePos, bRightMouseClicked, allObstacles);
                       });
     }
 }

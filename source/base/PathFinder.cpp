@@ -13,9 +13,10 @@ bool PathFinder::IsPointReached(const Vector2& point,
     return (GetManhattanDistance(point, target) < moveSpeed);
 }
 
-void PathFinder::Request(Vector2        currentPosition,
-                         const Vector2& target,
-                         const float    moveSpeed) {
+void PathFinder::Request(Vector2                       currentPosition,
+                         const Vector2&                target,
+                         const float                   moveSpeed,
+                         const std::vector<Rectangle>& allObstacles) {
     Reset();
     m_targetPoint = target;
 
