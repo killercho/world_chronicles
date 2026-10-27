@@ -42,4 +42,5 @@ void Villager::Process(const bool bMouseReleased, const Rectangle& mouseRect) {
     Draw();
     DrawSelectedOutline();
     DrawWalkingBoxOutline();
+    DrawCurrentPath();
 }

@@ -57,6 +57,24 @@ class Unit {
         }
         DrawRectangleLinesEx(m_walkingBox, 1.0f, BLUE);
     }
+    // Draws the path that the figure is currently taking.
+    // The template is used for easy removal of the outline with debug purposes.
+    template<bool bDraw = true> void DrawCurrentPath() const {
+        if constexpr (!bDraw) {
+            // Do not draw if the flag is not enabled.
+            return;
+        }
+        if (!m_bMoving) {
+            // Do not try to draw when there is no path.
+            return;
+        }
+        const auto&        path = m_pathFinder->GetWholePath();
+        const unsigned int currentPointIndex =
+            m_pathFinder->GetCurrentPointIndex();
+        for (unsigned int i = currentPointIndex; i < path.size(); ++i) {
+            DrawCircleV(path[i], 1.0f, GREEN);
+        }
+    }
 
     // Draws the unit taking into account its current state.
     virtual void Draw() = 0;
