@@ -5,9 +5,23 @@
 GeneralParser::GeneralParser(const String& filename) {
     IniParser parser(filename);
     ParseWindowSettings(parser.GetSection("WindowSettings"));
+    ParseMapSettings(parser.GetSection("MapSettings"));
 
     if (m_latestError.Empty()) {
         m_latestError = parser.GetLatestError();
+    }
+}
+
+void GeneralParser::ParseMapSettings(const SectionParser& section) {
+    if (!section.GetLatestError().Empty()) {
+        return;
+    }
+
+    try {
+        m_mapWidth  = section.GetValue<unsigned int>("Width");
+        m_mapHeight = section.GetValue<unsigned int>("Height");
+    } catch (const std::exception& e) {
+        m_latestError = e.what();
     }
 }
 

@@ -8,16 +8,23 @@
 // Parsed from the ini files.
 class GeneralParser {
  private:
+    // Window settings:
     unsigned int m_width{ 0 };
     unsigned int m_height{ 0 };
     unsigned int m_targetFps{ 0 };
-    String       m_title;
+
+    // Map settings:
+    unsigned int m_mapWidth{ 0 };
+    unsigned int m_mapHeight{ 0 };
+
+    String m_title;
 
     // Error that was found during the loading.
     String m_latestError;
 
-    // Parses the window settings.
+    // Parsers the settings:
     void ParseWindowSettings(const SectionParser& section);
+    void ParseMapSettings(const SectionParser& section);
 
  public:
     // Parses the settings from the ini settings file
@@ -33,6 +40,8 @@ class GeneralParser {
     unsigned int  GetWidth() const noexcept;
     unsigned int  GetHeight() const noexcept;
     unsigned int  GetTargetFps() const noexcept;
+    unsigned int  GetMapWidth() const noexcept;
+    unsigned int  GetMapHeight() const noexcept;
     const String& GetTitle() const noexcept;
 };
 
