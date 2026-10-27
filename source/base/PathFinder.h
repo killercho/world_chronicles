@@ -15,8 +15,9 @@ struct GridLocation {
     // Calculated using the manhattan distance function from the path class.
     float distanceToTarget{ 0.0f };
 
-    // The actual location of the grid on the map.
-    Vector2 coordinates;
+    // The coordinates used in a grid, that is created only
+    // for the pathfinding algorithm.
+    Vector2 gridCoordinates;
 
     // The parent that led to the current location.
     std::shared_ptr<GridLocation> parent;
@@ -30,10 +31,11 @@ struct GridLocation {
     GridLocation(const float                          newDistanceToStart,
                  const float                          newDistanceToTarget,
                  const Vector2&                       newCoordinates,
+                 const Vector2&                       newGridCoordinates,
                  const std::shared_ptr<GridLocation>& newParent)
         : distanceToStart(newDistanceToStart),
-          distanceToTarget(newDistanceToTarget), coordinates(newCoordinates),
-          parent(newParent) { }
+          distanceToTarget(newDistanceToTarget), 
+          gridCoordinates(newGridCoordinates), parent(newParent) { }
 };
 }  // namespace internal
 

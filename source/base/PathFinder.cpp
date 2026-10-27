@@ -44,6 +44,22 @@ void PathFinder::BuildPath(Vector2                       currentPosition,
             return left->GetScore() < right->GetScore();
         };
 
+    // TODO: Create a grid with a single grid square being (moveSpeed x moveSpeed) in size.
+    // TODO: Calculate where the current position falls into.
+    // TODO: Start the algorithm with that in mind.
+    // ...
+    // Make jumps in all directions and diagonals using the move speed.
+    // At each jump recalculate the value of the locations around the current node
+    // and add any changes.
+    // If a jump has colision between the walking box and the rect in the obstacles
+    // do not explore that grid location.
+    // Continue until the target is reached or there are no more possible options left to explore.
+    // Keep track of the seen coordinates in the grid so
+    // that the seen grid spaces are not explored again.
+    // ...
+    // TODO: After the algorithm finishes use the middles of the grid fields that are part of the path
+    // to form the positions used in the returned path.
+
     // Creates the priority of what is the next node that needs to be explored.
     std::priority_queue<std::shared_ptr<internal::GridLocation>,
                         std::list<std::shared_ptr<internal::GridLocation>>,
@@ -51,11 +67,14 @@ void PathFinder::BuildPath(Vector2                       currentPosition,
         gridLocations(gridLocationComparator);
 
     // Add the starting point of the algorithm - the current position.
+    /*
     gridLocations.push(std::make_shared<internal::GridLocation>(
         0,
         GetManhattanDistance(currentPosition, m_targetPoint),
         currentPosition,
+        ,
         nullptr));
+   */
 }
 
 void PathFinder::Request(Vector2                       currentPosition,
