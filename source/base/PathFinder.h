@@ -44,6 +44,9 @@ class PathFinder {
     // Returns the entire calculated path to the target.
     const std::vector<Vector2>& GetWholePath() const noexcept;
 
+    // Returnes the index of the current point on the path that was chosen.
+    unsigned int GetCurrentPointIndex() const noexcept;
+
     // Returns whether the target was reached.
     // This is when the unit needs to stop requesting a new path.
     // This is only true when there are no more points to be taken.

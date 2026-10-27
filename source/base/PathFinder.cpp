@@ -77,3 +77,7 @@ void PathFinder::AdjustMoveSpeed(float&         moveSpeedX,
         moveSpeedY = distanceY;
     }
 }
+
+unsigned int PathFinder::GetCurrentPointIndex() const noexcept {
+    return m_pointIndex;
+}
