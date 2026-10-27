@@ -1,4 +1,5 @@
 #include "PathFinder.h"
+#include <raylib.h>
 #include <stdexcept>
 
 void PathFinder::Reset() {
@@ -7,10 +8,14 @@ void PathFinder::Reset() {
 }
 
 bool PathFinder::IsPointReached(const Vector2& point,
-                                const Vector2& target) const {
-    // TODO: Add the scale factor here.
-    return (std::abs(target.x - point.x) < 0.1f &&
-            std::abs(target.y - point.y) < 0.1f);
+                                const Vector2& target,
+                                const float    moveSpeed) const {
+    TraceLog(LOG_INFO,
+             "distance manhattan: %f, x distance old: %f, y distance old: %f",
+             GetManhattanDistance(point, target),
+             std::abs(target.x - point.x),
+             std::abs(target.y - point.y));
+    return (GetManhattanDistance(point, target) < moveSpeed);
 }
 
 void PathFinder::Request(Vector2        currentPosition,
@@ -19,7 +24,7 @@ void PathFinder::Request(Vector2        currentPosition,
     Reset();
     m_targetPoint = target;
 
-    while (!IsPointReached(currentPosition, m_targetPoint)) {
+    while (!IsPointReached(currentPosition, m_targetPoint, moveSpeed)) {
         if (m_targetPoint.x > currentPosition.x) {
             currentPosition.x += moveSpeed;
         } else if (m_targetPoint.x < currentPosition.x) {

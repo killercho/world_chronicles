@@ -47,8 +47,9 @@ void VillagerParser::LoadMainSettings(const SectionParser& section) {
     }
 
     try {
-        m_maxHealth = section.GetValue<unsigned int>("Max_Health");
-        m_moveSpeed = section.GetValue<unsigned int>("Move_Speed");
+        m_maxHealth      = section.GetValue<unsigned int>("Max_Health");
+        m_moveSpeed      = section.GetValue<unsigned int>("Move_Speed");
+        m_moveSpeedScale = section.GetValue<unsigned int>("Move_Speed_Scale");
     } catch (const std::exception& e) {
         m_latestError = e.what();
     }
@@ -60,6 +61,10 @@ unsigned int VillagerParser::GetMaxHealth() const noexcept {
 
 unsigned int VillagerParser::GetMoveSpeed() const noexcept {
     return m_moveSpeed;
+}
+
+unsigned int VillagerParser::GetMoveSpeedScale() const noexcept {
+    return m_moveSpeedScale;
 }
 
 unsigned int VillagerParser::GetSpriteWidth() const noexcept {

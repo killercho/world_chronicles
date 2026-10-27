@@ -55,27 +55,17 @@ void Unit::Move() {
     }
 
     const Vector2 currentPos = Vector2(m_rect.x, m_rect.y);
-    float realSpeedX = m_moveSpeed;
-    float realSpeedY = m_moveSpeed;
+    float         realSpeedX = m_moveSpeed;
+    float         realSpeedY = m_moveSpeed;
 
     // Get distance instead and if the distance is 0 move to the next point.
     // Otherwise move with a fraction of the speed required so
     // that the move target is actually possible to get to.
-    if (m_pathFinder->IsPointReached(currentPos,
-                                     m_pathFinder->GetCurrentPoint())) {
+    if (m_pathFinder->IsPointReached(
+            currentPos, m_pathFinder->GetCurrentPoint(), m_moveSpeed)) {
         m_pathFinder->MoveToNextPoint();
     }
     m_pathFinder->AdjustMoveSpeed(realSpeedX, realSpeedY, currentPos);
-
-    TraceLog(LOG_INFO,
-             "current pos (%f, %f), target point (%f, %f), move speed x: %f, "
-             "move speed y: %f",
-             currentPos.x,
-             currentPos.y,
-             m_pathFinder->GetCurrentPoint().x,
-             m_pathFinder->GetCurrentPoint().y,
-             realSpeedX,
-             realSpeedY);
 
     const auto& nextPoint = m_pathFinder->GetCurrentPoint();
 

@@ -14,6 +14,8 @@ class VillagerParser {
     // The speed is converted to an appropriate float before being used.
     // Taken as an int to avoid any issues with floating points.
     unsigned int m_moveSpeed{ 0 };
+    // The speed of the unit will be multiplied by the scale to get the actual speed.
+    unsigned int m_moveSpeedScale{ 0 };
 
     // Sprite sizes that will be visualized.
     unsigned int m_spriteWidth{ 0 };
@@ -44,6 +46,7 @@ class VillagerParser {
     // Getters for all the constants of the class.
     unsigned int GetMaxHealth() const noexcept;
     unsigned int GetMoveSpeed() const noexcept;
+    unsigned int GetMoveSpeedScale() const noexcept;
     unsigned int GetSpriteWidth() const noexcept;
     unsigned int GetSpriteHeight() const noexcept;
     unsigned int GetWalkingBoxWidth() const noexcept;

@@ -27,7 +27,7 @@ class PathFinder {
 
     // Requests a path to a target point and prepares
     // the points that the unit needs to move towards.
-    // Takes the move speed to correctly calculate the grid so that the target is reachable 
+    // Takes the move speed to correctly calculate the grid so that the target is reachable
     // and it's as close to the perceived speed.
     void Request(Vector2        currentPosition,
                  const Vector2& target,
@@ -52,7 +52,9 @@ class PathFinder {
     // Returns true if the point given is considered an end to the path,
     // and actually the target.
     // Used during the computation process.
-    bool IsPointReached(const Vector2& point, const Vector2& target) const;
+    bool IsPointReached(const Vector2& point,
+                        const Vector2& target,
+                        const float    moveSpeed) const;
 
     // Adjust the move speed to be able to reach the target.
     // Only changes the speed down to something that will match the distance to the target

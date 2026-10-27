@@ -7,8 +7,8 @@ Villager::Villager(const std::shared_ptr<ResourceManager>& resourceManager)
                                             m_parser.GetSpriteWidth(),
                                             m_parser.GetSpriteHeight());
 
-    // TODO: Add a scale factor to the speed of the unit into the ini file as well.
-    m_moveSpeed = m_parser.GetMoveSpeed() / 10.0f;
+    m_moveSpeed = m_parser.GetMoveSpeed() /
+                  static_cast<float>(m_parser.GetMoveSpeedScale());
 
     m_rect.x      = 0;
     m_rect.y      = 0;
