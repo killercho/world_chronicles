@@ -1,6 +1,8 @@
 #include "Unit.h"
 #include <raylib.h>
 
+Unit::Unit() : m_pathFinder(std::make_shared<PathFinder>()) { }
+
 int Unit::GetHealth() const noexcept {
     return m_health;
 }

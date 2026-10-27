@@ -1,6 +1,7 @@
 #ifndef SOURCE_BASE_UNIT_H_
 #define SOURCE_BASE_UNIT_H_
 
+#include <base/PathFinder.h>
 #include <string/String.h>
 #include <raylib.h>
 
@@ -31,6 +32,9 @@ class Unit {
     bool m_bMoving{ false };
     // The point towards which the unit should move.
     Vector2 m_targetMovePoint;
+
+    // The algorithm that is used to find a path towards a point.
+    std::shared_ptr<PathFinder> m_pathFinder;
 
     // Places an outline on the unit when it is in a selected state.
     // The template is used for easy removal of the outline with debug purposes.
@@ -69,7 +73,7 @@ class Unit {
     virtual void UpdateWalkingBox() = 0;
 
  public:
-    Unit()                       = default;
+    Unit();
     virtual ~Unit()              = default;
     Unit(const Unit&)            = default;
     Unit(Unit&&)                 = default;
